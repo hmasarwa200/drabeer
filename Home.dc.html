@@ -138,18 +138,32 @@
     #nav-toggle:checked ~ #svc-nav{ transform:translateX(0) !important; }
     #svc-nav .svc-navlink{ font-size:16.5px !important; padding:16px 2px; border-bottom:1px solid #F4EEE6; width:100%; box-sizing:border-box; }
     #svc-nav > [data-svc-dd]{ width:100%; }
+    /* drawer accordion: tap the arrows to expand services / pregnancy sub-list */
     [data-svc-menu]{ display:none !important; }
+    #svc-nav .drawer-exp > [data-svc-menu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
+    #svc-nav .drawer-exp > [data-svc-menu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:2px 0 8px !important; }
+    #svc-nav .drawer-exp > [data-svc-menu] .svc-menu-link{ padding-inline-start:14px !important; }
+    #svc-nav [data-submenu]{ display:none !important; }
+    #svc-nav [data-sub].drawer-exp > [data-submenu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
+    #svc-nav [data-sub].drawer-exp > [data-submenu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:0 !important; }
+    #svc-nav [data-sub].drawer-exp > [data-submenu] .svc-menu-link{ padding-inline-start:34px !important; font-size:13.5px !important; }
+    #svc-nav [data-svc-dd] > a{ display:flex !important; width:100%; }
+    #svc-nav svg[data-caret], #svc-nav svg[data-subcaret]{ flex:none; width:32px; height:32px; padding:8px; box-sizing:border-box; margin-inline-start:auto; border:1px solid #EFE8DE; border-radius:50%; background:#FAF6F0; }
+    #svc-nav [data-svc-dd].drawer-exp > a svg[data-caret]{ transform:rotate(180deg); }
+    #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:rotate(-90deg) !important; }
+    html[lang="en"] #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:scaleX(-1) rotate(-90deg) !important; }
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
 
   @media (max-width: 860px){
-    #hero-portrait .hero-photo{ width:min(507px,86vw) !important; height:auto !important; }
-    .hero-arch{ width:min(430px,72vw) !important; height:min(463px,78vw) !important; }
+    #hero-portrait .hero-photo{ width:min(507px,64vw) !important; height:auto !important; }
+    .hero-arch{ width:min(430px,54vw) !important; height:min(463px,58vw) !important; }
     #about-grid{ grid-template-columns:1fr !important; gap:44px !important; }
     #about-grid p{ font-size:15px !important; line-height:1.9 !important; }
     #about-grid h2{ font-size:29px !important; }
     #about-grid .about-portrait{ max-width:300px; }
   }
+  html[lang="en"] #about-grid > div:last-child, html[lang="en"] #about-grid > div:last-child h2, html[lang="en"] #about-grid p{ text-align:left !important; direction:ltr; }
 </style>
 <script src="i18n.js?v=5"></script>
 </helmet>

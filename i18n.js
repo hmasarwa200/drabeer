@@ -532,6 +532,8 @@
   function updateSwitcher() {}
 
   function init() {
+    if (window.__i18nInit) return;
+    window.__i18nInit = true;
     injectAssets();
     // Wait for the DC runtime to mount the page before touching the DOM —
     // anything appended earlier gets wiped by the mount.
@@ -557,6 +559,19 @@
         var a = e.target && e.target.closest ? e.target.closest('#svc-nav a') : null;
         if (a) { var t = document.getElementById('nav-toggle'); if (t) t.checked = false; }
       });
+      // mobile drawer: arrows expand the services / pregnancy lists instead of navigating
+      document.addEventListener('click', function (e) {
+        if (e.__caretHandled) return;
+        e.__caretHandled = true;
+        var t = document.getElementById('nav-toggle');
+        if (!t || !t.checked) return;
+        var caret = e.target && e.target.closest ? (e.target.closest('#svc-nav svg[data-caret]') || e.target.closest('#svc-nav svg[data-subcaret]')) : null;
+        if (!caret) return;
+        e.preventDefault();
+        e.stopPropagation();
+        var box = caret.closest('[data-sub]') || caret.closest('[data-svc-dd]');
+        if (box) box.classList.toggle('drawer-exp');
+      }, true);
       // watchdog: a re-mount can still wipe the switcher — rebuild it if it disappears
       setInterval(function () {
         var el = document.getElementById('i18n-switcher');
