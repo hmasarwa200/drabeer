@@ -21,7 +21,6 @@
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
   .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
-  @media (max-width: 880px){ #svc-nav{ display:none !important; } }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
   details > summary { list-style: none; cursor: pointer; outline: none; }
@@ -79,7 +78,8 @@
 
   /* ===== mobile header: hamburger side drawer ===== */
   #nav-burger, #nav-backdrop, #nav-close{ display:none; }
-  @media (max-width: 720px){
+  @media (max-width: 880px){
+    header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
     header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }
@@ -175,7 +175,7 @@
   <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#FFFFFF;">
     <div style="position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:60px 48px 56px;display:flex;flex-direction:column;align-items:flex-start;">
       <a href="Services.dc.html" data-reveal="" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #F0EAE0;border-radius:999px;padding:8px 16px 8px 14px;font-size:13px;font-weight:600;letter-spacing:0.6px;color:#928272;margin-bottom:30px;transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateX(4px);box-shadow:0 8px 20px rgba(160,135,90,0.14);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>שירותים רפואיים</a>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:1px;background:#C9B69C;"></span><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">נוירולוגיית העובר · בדיקה ממוקדת</span></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">נוירולוגיית העובר · בדיקה ממוקדת</span></div>
       <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,5.6vw,76px);line-height:1.04;margin:0;color:#1C1B18;letter-spacing:-1px;">סקירה מכוונת <span style="color:#866e59;">למוח העובר</span></h1>
       <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;max-width:52ch;">בדיקת אולטרסאונד ייעודית ומעמיקה, המאפשרת הערכה מפורטת של מבנה מוח העובר, התפתחותו ותפקודו האנטומי.</p>
       <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;">

@@ -37,9 +37,6 @@
       will-change:opacity,transform;
     }
   }
-  @media (max-width: 880px){
-    #svc-nav{ display:none !important; }
-  }
   @media (max-width: 940px){
     #svc-cards-grid{ grid-template-columns:1fr !important; max-width:440px !important; }
   }
@@ -75,7 +72,8 @@
 
   /* ===== mobile header: hamburger side drawer ===== */
   #nav-burger, #nav-backdrop, #nav-close{ display:none; }
-  @media (max-width: 720px){
+  @media (max-width: 880px){
+    header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
     header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }

@@ -21,7 +21,6 @@
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
   .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
-  @media (max-width: 880px){ #svc-nav{ display:none !important; } }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
   [data-svc-dd]{ position: relative; }
@@ -88,7 +87,8 @@
 
   /* ===== mobile header: hamburger side drawer ===== */
   #nav-burger, #nav-backdrop, #nav-close{ display:none; }
-  @media (max-width: 720px){
+  @media (max-width: 880px){
+    header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
     header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }

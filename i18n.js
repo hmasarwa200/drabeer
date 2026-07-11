@@ -430,7 +430,7 @@
       '#i18n-switcher > button [data-chev] { transition:transform .22s ease; }' +
       '#i18n-switcher [data-menu] button:hover { background:#F7F1E8; }' +
       '#i18n-switcher [data-menu] button:hover [data-code] { color:#866e59; }' +
-      '@media (max-width:720px){ #i18n-switcher > button [data-lang-full]{display:none;} #i18n-switcher > button [data-lang-short]{display:inline;} #i18n-switcher > button{padding:8px 12px;} }';
+      '@media (max-width:880px){ #i18n-switcher > button [data-lang-full]{display:none;} #i18n-switcher > button [data-lang-short]{display:inline;} #i18n-switcher > button{padding:8px 12px;} }';
     document.head.appendChild(st);
   }
 

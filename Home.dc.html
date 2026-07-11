@@ -21,7 +21,6 @@
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
   .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
-  @media (max-width: 880px){ #svc-nav{ display:none !important; } }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } .testimonial-grid{ grid-template-columns:1fr !important; } }
   @media (min-width: 761px) and (max-width: 980px){ .testimonial-grid{ grid-template-columns:1fr 1fr !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
@@ -109,20 +108,19 @@
   .about-cta:hover .cta-arrow{ transform:translateX(-5px); }
   @media (max-width: 860px){
     #hero-inner{grid-template-columns:1fr !important;gap:0 !important;}
-    #hero-text{padding:48px 0 26px !important;text-align:center !important;align-items:center !important;}
+    #hero-text{padding:48px 0 26px !important;text-align:start !important;align-items:flex-start !important;}
     #hero-text > div:last-child{ display:none !important; }
-    .hero-cta-mobile{ display:flex !important; flex-wrap:wrap; gap:12px; justify-content:center; margin:30px 0 44px; width:100%; }
-    #hero-text p{margin-left:auto;margin-right:auto;}
+    .hero-cta-mobile{ display:flex !important; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin:30px 0 44px; width:100%; }
     #hero-portrait{max-width:320px;margin:0 auto;}
   }
   @media (max-width: 760px){
-    #feat-grid{grid-template-columns:1fr !important;text-align:center;}
-    #feat-grid p{margin-left:auto;margin-right:auto;}
+    #feat-grid{grid-template-columns:1fr !important;}
   }
 
   /* ===== mobile header: hamburger side drawer ===== */
   #nav-burger, #nav-backdrop, #nav-close{ display:none; }
-  @media (max-width: 720px){
+  @media (max-width: 880px){
+    header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
     header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }
@@ -144,7 +142,7 @@
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
 
-  @media (max-width: 720px){
+  @media (max-width: 860px){
     #hero-portrait .hero-photo{ width:min(507px,86vw) !important; height:auto !important; }
     .hero-arch{ width:min(430px,72vw) !important; height:min(463px,78vw) !important; }
     #about-grid{ grid-template-columns:1fr !important; gap:44px !important; }
