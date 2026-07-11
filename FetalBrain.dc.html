@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&amp;family=Assistant:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  a { color: inherit; }
+  .svc-navlink{ position: relative; }
+  .svc-navlink::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
+  .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
+  .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
+  .svc-foot-link:hover{ color:#1F1A17; }
+  @media (max-width: 880px){ #svc-nav{ display:none !important; } }
+  @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } }
+  @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
+  details > summary { list-style: none; cursor: pointer; outline: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  [data-acc]{ transition: background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
+  [data-acc]:hover{ background:#FFFFFF; border-color:#EFE9DF; box-shadow:0 16px 40px -20px rgba(80,62,44,0.16); transform:translateY(-2px); }
+  [data-acc][open]{ background:#FFFFFF; border-color:#ECE4D6; box-shadow:0 20px 48px -22px rgba(80,62,44,0.18); transform:none; }
+  .chev-wrap{ transition: background .3s ease; }
+  [data-acc][open] .chev-wrap{ background:#866e59 !important; border-color:#866e59 !important; }
+  [data-acc][open] .chev-wrap svg{ stroke:#FFFFFF; }
+  [data-acc][open] summary svg[data-chev]{ transform: rotate(180deg); }
+  [data-acc][open] [data-svc-desc]{ animation: svcReveal .4s cubic-bezier(.22,.61,.36,1); }
+  @keyframes svcReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .stage-pill{ text-decoration:none; display:inline-flex; align-items:center; gap:10px; border:none; border-radius:999px; padding:10px 19px 10px 21px; font-size:14px; font-weight:600; color:#4A463F; background:#F6F4F0; transition: all .3s ease; }
+  .stage-pill:hover{ background:#866e59; color:#FFFFFF; transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(134,110,89,0.5); }
+  .stage-pill:hover span{ background:#FFFFFF !important; }
+  .stage-head{ position:sticky; top:110px; }
+  [data-cell]{ transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, border-color .4s ease; }
+  [data-cell]:hover{ transform: translateY(-5px); box-shadow: 0 30px 60px -30px rgba(80,62,44,0.28); border-color:#E3D7C5 !important; }
+  @media (prefers-reduced-motion: no-preference){
+    [data-anim].anim-ready h1,[data-anim].anim-ready h2,[data-anim].anim-ready h3,[data-anim].anim-ready p,[data-anim].anim-ready [data-reveal]{
+      opacity:0;transform:translateY(22px);
+      transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);
+      will-change:opacity,transform;
+    }
+  }
+  @media (max-width: 900px){
+    .stage-grid{ grid-template-columns:1fr !important; }
+    .stage-head{ position:static !important; display:flex; align-items:baseline; gap:16px; }
+    .fb-checks{ grid-template-columns:1fr !important; }
+  }
+
+  [data-svc-menu]{ position: absolute; top: 100%; right: 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .22s ease, transform .22s ease, visibility .22s; z-index: 60; }
+  [data-svc-dd]:hover [data-svc-menu], [data-svc-dd]:focus-within [data-svc-menu]{ opacity: 1; visibility: visible; transform: translateY(0); }
+  [data-svc-dd]:hover [data-caret]{ transform: rotate(180deg); }
+  .svc-menu-link{ transition: background .2s ease, color .2s ease; }
+  .svc-menu-link:hover{ background:#F7F1E8; color:#1F1A17 !important; }
+  [data-sub]{ position: relative; }
+  [data-submenu]{ position:absolute; top:-8px; inset-inline-start:100%; padding-inline-start:22px; opacity:0; visibility:hidden; transform:translateX(-10px); transition:opacity .28s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1), visibility .28s; z-index:61; }
+  [dir="rtl"] [data-submenu]{ transform:translateX(10px); }
+  [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ opacity:1; visibility:visible; transform:translateX(0); }
+  [data-sub]:hover > .svc-menu-link{ background:#F7F1E8; color:#1F1A17 !important; }
+  [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
+  [data-submenu] .svc-menu-link::before{ content:""; flex:none; width:5px; height:5px; border-radius:50%; background:#B29B82; opacity:0; transform:scale(.3); transition:opacity .22s ease, transform .28s cubic-bezier(.22,.61,.36,1); }
+  [data-submenu] .svc-menu-link:hover::before{ opacity:1; transform:scale(1); }
+  /* narrow viewports: no room on the arrow side — flip the submenu toward the page center (caret flips to match) */
+  @media (max-width: 1080px){
+    [data-submenu]{ inset-inline-start:auto; inset-inline-end:100%; padding-inline-start:0; padding-inline-end:24px; transform:translateX(10px); }
+    [dir="rtl"] [data-submenu]{ transform:translateX(-10px); }
+    [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ transform:translateX(0); }
+    [dir="rtl"] svg[data-subcaret]{ transform:scaleX(-1); }
+    html[lang="en"] svg[data-subcaret]{ transform:none !important; }
+  }
+  [data-sub]:hover [data-subcaret]{ color:#866e59; }
+</style>
+<script src="i18n.js?v=5"></script>
+</helmet>
+
+<div dir="rtl" id="top" data-anim="" style="font-family:'Assistant',sans-serif;background:#FEFEFE;color:#1F1E1B;min-height:100vh;-webkit-font-smoothing:antialiased;">
+
+  <!-- ===== HEADER ===== -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(254,254,254,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E7DDD1;">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;">
+      <a href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:14px;">
+        <span style="flex:none;display:inline-flex;">
+          <img src="assets/logo-cropped.png" alt="לוגו" style="display: block; height: 58px; width: auto">
+        </span>
+        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:right;">
+          <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
+          <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+        </span>
+      </a>
+      <nav id="svc-nav" style="display:flex;align-items:center;gap:40px;">
+        <a class="svc-navlink" href="Home.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">עמוד הבית</a>
+        <a class="svc-navlink" href="About.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">אודות</a>
+        <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
+          <a class="svc-navlink is-active" href="Services.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">שירותים רפואיים<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
+          <div data-svc-menu="">
+            <div style="min-width:268px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:8px;">
+
+              <div data-sub="" style="position:relative;">
+                <a class="svc-menu-link" href="Pregnancy.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                  <span style="display:flex;flex-direction:column;gap:3px;text-align:right;">
+                    <span style="font-size:14.5px;font-weight:500;">אולטרסאונד בהריון</span>
+                    <span style="font-size:12px;color:#A89888;font-weight:300;">כל בדיקות ההריון</span>
+                  </span>
+                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B49B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
+                </a>
+                <div data-submenu="">
+                  <div style="min-width:266px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:18px;box-shadow:0 28px 64px -26px rgba(80,62,44,0.32), 0 6px 20px -12px rgba(80,62,44,0.14);padding:10px;">
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון צעיר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">שקיפות עורפית</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מוקדמת</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מאוחרת</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות שלישית</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למוח העובר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למומים אחרים</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">גדילת העובר ובדיקת זרימות בדופלר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון מרובה עוברים</a>
+                  </div>
+                </div>
+              </div>
+
+              <a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">אולטרסאונד גינקולוגי</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">בריאות האישה</span>
+              </a>
+
+              <a class="svc-menu-link" href="FetalBrain.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">סקירה מכוונת למוח העובר</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">נוירולוגיית העובר</span>
+              </a>
+
+            </div>
+          </div>
+        </span>
+        <a class="svc-navlink" href="Home.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">יצירת קשר</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#FFFFFF;">
+    <div style="position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:60px 48px 56px;display:flex;flex-direction:column;align-items:flex-start;">
+      <a href="Services.dc.html" data-reveal="" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #F0EAE0;border-radius:999px;padding:8px 16px 8px 14px;font-size:13px;font-weight:600;letter-spacing:0.6px;color:#928272;margin-bottom:30px;transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateX(4px);box-shadow:0 8px 20px rgba(160,135,90,0.14);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>שירותים רפואיים</a>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:1px;background:#C9B69C;"></span><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">נוירולוגיית העובר · בדיקה ממוקדת</span></div>
+      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,5.6vw,76px);line-height:1.04;margin:0;color:#1C1B18;letter-spacing:-1px;">סקירה מכוונת <span style="color:#866e59;">למוח העובר</span></h1>
+      <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;max-width:52ch;">בדיקת אולטרסאונד ייעודית ומעמיקה, המאפשרת הערכה מפורטת של מבנה מוח העובר, התפתחותו ותפקודו האנטומי.</p>
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;">
+        <a class="stage-pill" href="#what"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">1</span>מהי הבדיקה</a>
+        <a class="stage-pill" href="#when"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">2</span>מתי מבצעים</a>
+        <a class="stage-pill" href="#how"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">3</span>כיצד מתבצעת</a>
+        <a class="stage-pill" href="#indications"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">4</span>מתי מומלץ לשקול</a>
+        <a class="stage-pill" href="#learn"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">5</span>מה ניתן ללמוד</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTIONS ===== -->
+  <section data-screen-label="Content" style="background:#FFFFFF;padding:36px 48px 72px;">
+    <div style="max-width:1120px;margin:0 auto;">
+
+      <!-- 01 WHAT -->
+      <div id="what" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:16px 0 40px;scroll-margin-top:110px;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">01</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">מהי הבדיקה</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:18px;line-height:1.85;color:#4A463F;margin:0 0 28px;font-weight:300;max-width:58ch;">כאשר בסקירת המערכות עולה חשד לממצא חריג, או כאשר קיימים גורמי סיכון מסוימים, ניתן לבצע סקירה מכוונת למוח העובר, בדיקת אולטרסאונד ייעודית ומעמיקה המאפשרת <span style="color: rgb(134, 110, 89); font-weight: 500;">הערכה מפורטת</span> של מבנה המוח, התפתחותו ותפקודו האנטומי.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">01</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">מטרת הבדיקה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">הסקירה נועדה לספק תמונה רחבה ומדויקת של התפתחות המוח, ולאפשר זיהוי מוקדם ככל האפשר של חריגות מבניות או סימנים העלולים להעיד על הפרעה בהתפתחות הנוירולוגית. במקרים רבים היא מספקת מידע מרגיע ומאשרת התפתחות מוחית תקינה, ובמקרים אחרים מסייעת בקבלת החלטות רפואיות מושכלות ובהמשך בירור מתאים.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">02</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">חשיבות הבדיקה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">הבדיקה מספקת הערכה מעמיקה של מוח העובר, מסייעת בזיהוי מוקדם של מצבים הדורשים התייחסות רפואית, ובמקרים רבים מעניקה שקט נפשי ואישור להתפתחות תקינה. כאשר קיימת המלצה רפואית לביצוע הבדיקה, מומלץ לפנות לגניקולוג מומחה בעל ניסיון ייעודי בתחום, על מנת לקבל את ההערכה המקצועית והמדויקת ביותר.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 WHEN -->
+      <div id="when" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">02</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">מתי מבצעים</div>
+            <div style="font-size:13.5px;color:#A08F7D;margin-top:8px;font-weight:400;">העיתוי מותאם אישית</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;max-width:52ch;">מועד הביצוע נקבע בהתאם לסיבה להפניה ולממצאים שהתגלו במהלך המעקב ההריוני, שכן יכולות ההדמיה משתנות בהתאם לשבוע ההיריון.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">01</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">שליש שלישי, סביב שבועות <span dir="ltr" style="unicode-bidi: isolate;">30–32</span></span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">ברוב המקרים, לצורך הערכה מיטבית של מבני מוח העובר, מומלץ לבצע את הסקירה בשליש השלישי, כאשר התפתחות המוח מתקדמת יותר ומאפשרת הדמיה מפורטת ומדויקת יותר.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">02</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">בכל שלב של ההיריון, כאשר עולה חשד לממצא חריג</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">במקרים בהם עולה חשד לממצא חריג, ניתן לבצע את הסקירה בכל שלב של ההיריון, תוך התחשבות בכך שיכולות ההדמיה והממצאים הניתנים להערכה משתנים בהתאם לשבוע ההיריון.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">03</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">שלבים מוקדמים יותר, כשקיימת אינדיקציה רפואית ברורה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר קיימת אינדיקציה רפואית ברורה, ניתן לבצע את הסקירה גם בשלבים מוקדמים יותר. עיתוי הבדיקה מותאם אישית בהתאם לסיבה להפניה, לשבוע ההיריון ולממצאים קודמים שעלו בבדיקות אחרות.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 CHECKED -->
+      <div id="how" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">03</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">כיצד מתבצעת</div>
+            <div style="font-size:13.5px;color:#A08F7D;margin-top:8px;font-weight:400;">על ידי גניקולוג מומחה</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;max-width:52ch;">הבדיקה מתבצעת על ידי גניקולוג מומחה בעל ניסיון ייעודי בתחום, ברוב המקרים בשילוב בין גישה בטנית לגישה נרתיקית.</p>
+          <div class="fb-checks" data-reveal="" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">01</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">גישה משולבת</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">המתמר הנרתיקי מאפשר רזולוציה גבוהה יותר, במיוחד כאשר העובר במצג ראש.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">02</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">טכנולוגיות תלת-ממד</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">במידת הצורך, זוויות הדמיה נוספות והערכה מדויקת של מבנים.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">03</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">בחינה שיטתית</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">חדרי המוח, הקורפוס קלוסום, המוחון, גזע המוח, קליפת המוח ומבני קו האמצע.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">04</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">זרימת דם ומדדים</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">הערכת זרימת הדם המוחית ומדדים נוספים המעידים על התפתחות מוחית תקינה.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 04 INDICATIONS -->
+      <div id="indications" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">04</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">מתי מומלץ לשקול</div>
+            <div style="font-size:13.5px;color:#A08F7D;margin-top:8px;font-weight:400;">חמש קבוצות של מצבים</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 8px;font-weight:300;max-width:52ch;">ישנם מספר מצבים רפואיים בהם מומלץ לבצע הערכה מעמיקה וממוקדת יותר של מוח העובר, במטרה לבחון את מבנה המוח, לזהות ממצאים חריגים ולהעריך את משמעותם הקלינית.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#A08F7D;margin:26px 0 4px;padding-right:4px;">ממצאים בסקירת מערכות שגרתית</div>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">01</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">הרחבה של חדרי המוח</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">הרחבה של חדרי המוח עלולה להעיד על הצטברות מוגברת של נוזל מוחי או על שינוי בהתפתחות מבני המוח. במקרים רבים מדובר בממצא קל ללא משמעות קלינית, אך לעיתים הוא מחייב בירור נוסף ומעקב הדוק. סקירה מכוונת מאפשרת להעריך את חומרת ההרחבה ולבדוק האם קיימים ממצאים נוספים הנלווים אליה.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">02</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">אסימטריה במבני המוח</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר קיים הבדל בגודל או במבנה בין שני צדי המוח, יש צורך בהערכה מפורטת יותר של האנטומיה המוחית. לעיתים מדובר בווריאציה תקינה של ההתפתחות, אך במקרים מסוימים האסימטריה עשויה להצביע על הפרעה התפתחותית או על פגיעה שהתרחשה במהלך ההיריון.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">03</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">ציסטות תוך-מוחיות</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">ציסטות בתוך מוח העובר עשויות להופיע כחלק מתהליך התפתחות תקין או להיות קשורות למצבים רפואיים שונים. סקירה מכוונת מאפשרת להעריך את מיקומן, גודלן ומאפייניהן. במקרים רבים מדובר בממצא חולף הנעלם בהמשך ההיריון.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">04</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">חשד למומים במוחון או במבני קו האמצע</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">המוחון ומבני קו האמצע ממלאים תפקיד מרכזי בהתפתחות התקינה של מערכת העצבים. כאשר עולה חשד לחריגה באחד ממבנים אלו, יש חשיבות רבה להערכה מפורטת של שלמות המבנים, גודלם והקשרים האנטומיים ביניהם.</p>
+            </details>
+            <div style="font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#A08F7D;margin:26px 0 4px;padding-right:4px;">מדדי ראש שאינם תואמים את גיל ההיריון</div>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">05</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">היקף ראש קטן מהמצופה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">היקף ראש קטן מהטווח הצפוי לשבוע ההיריון עשוי להיות קשור למגוון גורמים, החל משונות התפתחותית תקינה ועד למצבים המשפיעים על התפתחות המוח. סקירה מכוונת מאפשרת לבחון האם מבני המוח עצמם מתפתחים באופן תקין.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">06</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">היקף ראש גדול מהמצופה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר היקף הראש גדול מהצפוי, חשוב לבדוק האם מדובר במאפיין משפחתי תקין או בממצא הקשור לשינויים במבנה המוח או בכמות הנוזלים המוחיים. הבדיקה מספקת מידע מפורט על האנטומיה המוחית.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">07</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">שינוי בקצב גדילת הראש</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">לא רק גודל הראש חשוב, אלא גם קצב הגדילה שלו לאורך הזמן. שינוי משמעותי בקצב הגדילה עשוי להעיד על תהליך התפתחותי הדורש בירור נוסף. סקירה מכוונת מאפשרת להשוות בין מדידות קודמות.</p>
+            </details>
+            <div style="font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#A08F7D;margin:26px 0 4px;padding-right:4px;">חשד לזיהום תוך-רחמי</div>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">08</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">CMV</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">זיהום בנגיף CMV במהלך ההיריון עלול במקרים מסוימים להשפיע על התפתחות מערכת העצבים המרכזית. סקירה מכוונת למוח מסייעת לזהות סימנים אפשריים לפגיעה מוחית ולבחון האם קיימים שינויים מבניים הקשורים לזיהום.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">09</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">טוקסופלזמה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">טוקסופלזמה היא מחלה זיהומית העלולה לעבור מהאם לעובר ולפגוע במערכת העצבים המרכזית. כאשר עולה חשד לחשיפה או להדבקה, מומלץ לבצע הערכה מפורטת של מוח העובר לאיתור ממצאים אופייניים.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">10</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">זיקה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">נגיף הזיקה ידוע כגורם העלול להשפיע על התפתחות מוח העובר, במיוחד כאשר החשיפה מתרחשת במהלך ההיריון. סקירה מכוונת מאפשרת לבדוק את מבנה המוח ואת מדדי הגדילה של הראש, ולזהות סימנים לפגיעה בהתפתחות.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">11</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">זיהומים נוספים</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">קיימים זיהומים נוספים העלולים להשפיע על התפתחות מוח העובר בדרגות שונות. במקרים אלו, סקירה ייעודית מספקת מידע חשוב על מצב המוח ומאפשרת להחליט האם נדרש בירור משלים או מעקב ייעודי.</p>
+            </details>
+            <div style="font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#A08F7D;margin:26px 0 4px;padding-right:4px;">רקע רפואי או משפחתי משמעותי</div>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">12</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">היסטוריה משפחתית של מומים מוחיים</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר קיימים במשפחה מקרים של מומים מולדים במוח או במערכת העצבים, עשויה להיות הצדקה להערכה מעמיקה יותר של מוח העובר. הבדיקה מסייעת לזהות ממצאים מוקדמים ולהעניק להורים מידע מדויק יותר.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">13</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">מחלות גנטיות המשפיעות על מערכת העצבים</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">ישנן מחלות גנטיות העלולות להשפיע על מבנה המוח או על תהליך התפתחותו. במצבים אלו סקירה מכוונת מהווה חלק חשוב מהבירור ומאפשרת לאתר ממצאים אנטומיים העלולים להיות קשורים לרקע הגנטי.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">14</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">עיכוב התפתחותי או נוירולוגי במשפחה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר קיים סיפור משפחתי של הפרעות נוירולוגיות או עיכובים התפתחותיים, לעיתים מומלץ להרחיב את הבירור. סקירה מכוונת מאפשרת לבחון את מבני המוח המרכזיים ולוודא כי ההתפתחות מתקדמת כמצופה.</p>
+            </details>
+            <div style="font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#A08F7D;margin:26px 0 4px;padding-right:4px;">מצבים הקשורים להריון עצמו</div>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">15</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">האטה בגדילה התוך-רחמית</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">עוברים הסובלים מהאטה בגדילה עלולים להיות בסיכון מוגבר למצבים המשפיעים גם על התפתחות המוח. בדיקה ממוקדת מאפשרת להעריך את מבני המוח ואת זרימת הדם המוחית, כחלק מהערכת מצב העובר הכוללת.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">16</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">מומים בעמוד השדרה</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">מומים מסוימים בעמוד השדרה עשויים להיות מלווים גם בשינויים במבנה המוח. לכן, כאשר מאובחן מום בעמוד השדרה, מקובל לבצע הערכה מפורטת של מערכת העצבים המרכזית כולה.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">17</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">חשיפה לתרופות מסוימות</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">במקרים בהם הייתה חשיפה לתרופות בעלות פוטנציאל להשפיע על התפתחות העובר, ייתכן שיומלץ על סקירה מכוונת למוח. מטרת הבדיקה היא לוודא כי מבני המוח מתפתחים באופן תקין ולשלול ממצאים חריגים.</p>
+            </details>
+            <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+              <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">18</span>
+                <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">ממצאים חריגים בבדיקות גנטיות או ב-MRI עוברי</span>
+                <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+              </summary>
+              <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">כאשר בדיקות גנטיות או בדיקות הדמיה אחרות מעלות ממצא המחייב בירור נוסף, סקירה מכוונת למוח מהווה כלי משלים חשוב. היא מאפשרת לבחון את האנטומיה המוחית בזמן אמת ולשלב את כלל הנתונים.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 LEARN -->
+      <div id="learn" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">05</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">מה ניתן ללמוד</div>
+            <div style="font-size:13.5px;color:#A08F7D;margin-top:8px;font-weight:400;">4 תובנות מהבדיקה</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;max-width:52ch;">סקירה מכוונת למוח העובר מספקת מידע מפורט על מבנה המוח והתפתחותו, ומסייעת בקבלת החלטות רפואיות ובהתאמת המשך המעקב ההריוני.</p>
+          <div class="fb-checks" data-reveal="" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">01</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">התאמה לשבוע ההיריון</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">הבדיקה מאפשרת להשוות את התפתחות מבני המוח לשלב ההיריון, ולוודא כי ההתפתחות תואמת את הצפוי.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">02</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">סימנים להפרעה בהתפתחות</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">בחינת כלל מבני המוח וחיפוש סימנים העלולים להעיד על חריגה, לתכנון נכון של המשך הבירור.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">03</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">צורך בבירור משלים</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">במקרים בהם מתגלה ממצא הדורש מידע נוסף, התוצאות מסייעות להחליט על בדיקות משלימות כגון MRI עוברי או ייעוץ גנטי.</p>
+            </div>
+            <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">04</span>
+              <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">משמעות קלינית אפשרית</h3>
+              <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">מעבר לזיהוי הממצא, הבדיקה מסייעת בהבנת המשמעות הרפואית האפשרית ובהערכת ההשלכות העתידיות.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 FAQ -->
+      <div id="faq" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 24px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+        <div class="stage-head">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">06</div>
+          <div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">שאלות נפוצות</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">מדוע חשוב שהבדיקה תתבצע על ידי גניקולוג מומחה בתחום?</span>
+              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </summary>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">הערכת מוח העובר דורשת מיומנות גבוהה, ניסיון רב והיכרות מעמיקה עם שלבי ההתפתחות התקינים של מערכת העצבים לאורך ההיריון. מדובר בתחום ייחודי המשלב ידע מתקדם באולטרסאונד מיילדותי, נוירולוגיה עוברית והדמיה עוברית. פענוח מדויק של הממצאים מאפשר להבדיל בין וריאציות תקינות לבין סימנים המחייבים בירור נוסף, ולהעניק להורים מידע אמין ומבוסס לצורך קבלת החלטות.</p>
+          </details>
+          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">האם הבדיקה מחליפה סקירת מערכות?</span>
+              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </summary>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">לא. היא משלימה את סקירת המערכות ומעמיקה בתחום אחד — מבנה המוח ומערכת העצבים.</p>
+          </details>
+          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">האם צריך הפניה?</span>
+              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </summary>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">מומלץ להגיע עם הפניה, אך ניתן לברר התאמה לבדיקה גם באופן ישיר.</p>
+          </details>
+          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">כמה זמן נמשכת הבדיקה?</span>
+              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </summary>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">משך הבדיקה משתנה בהתאם לממצאים ולשלב ההריון, ולרוב היא ארוכה מסקירה רגילה.</p>
+          </details>
+          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
+            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">האם הבדיקה כרוכה בסיכון?</span>
+              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+            </summary>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">מדובר בבדיקת אולטרסאונד רגילה, ללא קרינה, שאינה כרוכה בסיכון.</p>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section data-screen-label="CTA" style="padding:24px 48px 110px;background:#FFFFFF;">
+    <div style="max-width:1120px;margin:0 auto;background:linear-gradient(150deg,#332A21 0%,#4A3B2D 100%);border-radius:32px;padding:76px 56px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-90px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(216,194,156,0.18) 0%,rgba(216,194,156,0) 70%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;">
+        <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);color:#FDFBF8;margin:0 0 16px;letter-spacing:0.2px;">נשארו שאלות?</h2>
+        <p style="font-size:17px;line-height:1.8;color:#D9C8B8;margin:0 0 38px;font-weight:300;">ניתן ליצור קשר לקבלת מידע נוסף או לבירור התאמה לבדיקה.</p>
+        <a href="Home.dc.html#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#FDFBF8;color:#332A21;font-size:15.5px;font-weight:600;letter-spacing:0.4px;padding:16px 42px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(0,0,0,0.45);">יצירת קשר<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact" style="background:#FCFBF9;border-top:1px solid #F1ECE4;scroll-margin-top:96px;">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 48px 56px;">
+      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;">
+
+        <div>
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
+              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+            </div>
+            <span style="flex:none;display:inline-flex;margin-top:2px;">
+              <img src="assets/flower-sprig.png" alt="" style="display:block;height:64px;width:auto;">
+            </span>
+          </div>
+          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">רפואה מדויקת, רגישה ומקצועית לאורך הדרך — בליווי אישי בכל שלבי החיים.</p>
+        </div>
+
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">ניווט מהיר</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <a class="svc-foot-link" href="Home.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">עמוד הבית</a>
+            <a class="svc-foot-link" href="About.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אודות</a>
+            <a class="svc-foot-link" href="Services.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">שירותים רפואיים</a>
+            <a class="svc-foot-link" href="Home.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">יצירת קשר</a>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">שירותים</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <a class="svc-foot-link" href="FetalBrain.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">סקירה מכוונת למוח העובר</a>
+            <a class="svc-foot-link" href="Pregnancy.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד בהריון</a>
+            <a class="svc-foot-link" href="Gynecological.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד גינקולוגי</a>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">פרטי התקשרות</div>
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">052-1234567</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">info@dr-masarwa.co.il</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;">תל אביב, ישראל</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:56px;padding-top:30px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none" stroke="#C7B299" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
+        <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© כל הזכויות שמורות לד״ר עביר מסארוה</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const SEL = 'h1,h2,h3,p,[data-reveal]';
+    try {
+      const root = document.querySelector('[data-anim]') || document.body;
+      if (root.classList) root.classList.add('anim-ready');
+      const all = Array.from(root.querySelectorAll(SEL));
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const force = (el) => { el.style.setProperty('transition', 'none', 'important'); el.style.setProperty('opacity', '1', 'important'); el.style.setProperty('transform', 'none', 'important'); };
+      if (reduced) { all.forEach(force); return; }
+      const show = (el) => {
+        const sibs = Array.from(el.parentElement.children).filter(c => c.matches && c.matches(SEL));
+        const i = Math.max(0, sibs.indexOf(el));
+        el.style.setProperty('transition-delay', Math.min(i * 90, 360) + 'ms');
+        el.style.setProperty('opacity', '1', 'important');
+        el.style.setProperty('transform', 'none', 'important');
+      };
+      let pending = all.slice();
+      const vh = () => window.innerHeight || document.documentElement.clientHeight || 800;
+      const inView = (el) => { const r = el.getBoundingClientRect(); return r.top < vh() * 0.94 && r.bottom > 0; };
+      const tick = () => {
+        pending = pending.filter(el => { if (inView(el)) { show(el); return false; } return true; });
+        if (!pending.length) { window.removeEventListener('scroll', tick); window.removeEventListener('resize', tick); }
+      };
+      requestAnimationFrame(tick);
+      window.addEventListener('scroll', tick, { passive: true });
+      window.addEventListener('resize', tick);
+      setTimeout(() => { all.forEach(force); }, 2000);
+    } catch (err) {
+      document.querySelectorAll(SEL).forEach(el => { el.style.setProperty('opacity', '1', 'important'); el.style.setProperty('transform', 'none', 'important'); });
+    }
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

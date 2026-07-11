@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&amp;family=Assistant:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  a { color: inherit; }
+  .svc-navlink{ position: relative; }
+  .svc-navlink::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
+  .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
+  .svc-card{ transition: box-shadow .5s cubic-bezier(.16,.68,.4,1), transform .5s cubic-bezier(.16,.68,.4,1), border-color .5s ease; }
+  .svc-card:hover{ box-shadow:0 30px 60px -24px rgba(140,122,100,0.3); transform:translateY(-8px); border-color:#E5DACC !important; }
+  .svc-icon-wrap{ transition:transform .55s cubic-bezier(.16,.68,.4,1); }
+  .svc-card:hover .svc-icon-wrap{ transform:scale(1.06) rotate(-2deg); }
+  .svc-cta-circle{ width:46px; height:46px; border-radius:50%; background:#FBF8F4; border:1px solid #F0EAE2; color:#8C7A64; display:inline-flex; align-items:center; justify-content:center; transition:all .45s cubic-bezier(.16,.68,.4,1); }
+  .svc-cta-circle svg{ transition:transform .45s cubic-bezier(.16,.68,.4,1); }
+  .svc-card:hover .svc-cta-circle{ background:#1F1A17; color:#FEFEFE; box-shadow:0 16px 32px -10px rgba(31,26,23,0.4); }
+  .svc-card:hover .svc-cta-circle svg{ transform:translateX(-4px); }
+  .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
+  .svc-foot-link:hover{ color:#1F1A17; }
+  @media (prefers-reduced-motion: no-preference){
+    [data-anim].anim-ready h1,[data-anim].anim-ready h2,[data-anim].anim-ready h3,[data-anim].anim-ready p,[data-anim].anim-ready [data-reveal]{
+      opacity:0;transform:translateY(20px);
+      transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);
+      will-change:opacity,transform;
+    }
+  }
+  @media (max-width: 880px){
+    #svc-nav{ display:none !important; }
+  }
+  @media (max-width: 940px){
+    #svc-cards-grid{ grid-template-columns:1fr !important; max-width:440px !important; }
+  }
+  @media (max-width: 760px){
+    .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; }
+  }
+  @media (max-width: 480px){
+    .svc-foot-grid{ grid-template-columns:1fr !important; }
+  }
+
+  [data-svc-menu]{ position: absolute; top: 100%; right: 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .22s ease, transform .22s ease, visibility .22s; z-index: 60; }
+  [data-svc-dd]:hover [data-svc-menu], [data-svc-dd]:focus-within [data-svc-menu]{ opacity: 1; visibility: visible; transform: translateY(0); }
+  [data-svc-dd]:hover [data-caret]{ transform: rotate(180deg); }
+  .svc-menu-link{ transition: background .2s ease, color .2s ease; }
+  .svc-menu-link:hover{ background:#F7F1E8; color:#1F1A17 !important; }
+  [data-sub]{ position: relative; }
+  [data-submenu]{ position:absolute; top:-8px; inset-inline-start:100%; padding-inline-start:22px; opacity:0; visibility:hidden; transform:translateX(-10px); transition:opacity .28s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1), visibility .28s; z-index:61; }
+  [dir="rtl"] [data-submenu]{ transform:translateX(10px); }
+  [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ opacity:1; visibility:visible; transform:translateX(0); }
+  [data-sub]:hover > .svc-menu-link{ background:#F7F1E8; color:#1F1A17 !important; }
+  [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
+  [data-submenu] .svc-menu-link::before{ content:""; flex:none; width:5px; height:5px; border-radius:50%; background:#B29B82; opacity:0; transform:scale(.3); transition:opacity .22s ease, transform .28s cubic-bezier(.22,.61,.36,1); }
+  [data-submenu] .svc-menu-link:hover::before{ opacity:1; transform:scale(1); }
+  /* narrow viewports: no room on the arrow side — flip the submenu toward the page center (caret flips to match) */
+  @media (max-width: 1080px){
+    [data-submenu]{ inset-inline-start:auto; inset-inline-end:100%; padding-inline-start:0; padding-inline-end:24px; transform:translateX(10px); }
+    [dir="rtl"] [data-submenu]{ transform:translateX(-10px); }
+    [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ transform:translateX(0); }
+    [dir="rtl"] svg[data-subcaret]{ transform:scaleX(-1); }
+    html[lang="en"] svg[data-subcaret]{ transform:none !important; }
+  }
+  [data-sub]:hover [data-subcaret]{ color:#866e59; }
+</style>
+<script src="i18n.js?v=5"></script>
+</helmet>
+
+<div dir="rtl" data-anim="" style="font-family:'Assistant',sans-serif;background:#FEFEFE;color:#1F1A17;min-height:100vh;-webkit-font-smoothing:antialiased;">
+
+  <!-- ===== HEADER ===== -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(254,254,254,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E7DDD1;">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;">
+      <a href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:14px;">
+        <span style="flex:none;display:inline-flex;">
+          <img src="assets/logo-cropped.png" alt="לוגו" style="display:block;height:58px;width:auto;">
+        </span>
+        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:right;">
+          <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
+          <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+        </span>
+      </a>
+      <nav id="svc-nav" style="display:flex;align-items:center;gap:40px;">
+        <a class="svc-navlink" href="Home.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">עמוד הבית</a>
+        <a class="svc-navlink" href="About.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">אודות</a>
+        <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
+          <a class="svc-navlink is-active" href="Services.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">שירותים רפואיים<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
+          <div data-svc-menu="">
+            <div style="min-width:268px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:8px;">
+
+              <div data-sub="" style="position:relative;">
+                <a class="svc-menu-link" href="Pregnancy.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                  <span style="display:flex;flex-direction:column;gap:3px;text-align:right;">
+                    <span style="font-size:14.5px;font-weight:500;">אולטרסאונד בהריון</span>
+                    <span style="font-size:12px;color:#A89888;font-weight:300;">כל בדיקות ההריון</span>
+                  </span>
+                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B49B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
+                </a>
+                <div data-submenu="">
+                  <div style="min-width:266px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:18px;box-shadow:0 28px 64px -26px rgba(80,62,44,0.32), 0 6px 20px -12px rgba(80,62,44,0.14);padding:10px;">
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון צעיר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">שקיפות עורפית</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מוקדמת</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מאוחרת</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות שלישית</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למוח העובר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למומים אחרים</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">גדילת העובר ובדיקת זרימות בדופלר</a>
+                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון מרובה עוברים</a>
+                  </div>
+                </div>
+              </div>
+
+              <a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">אולטרסאונד גינקולוגי</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">בריאות האישה</span>
+              </a>
+
+              <a class="svc-menu-link" href="FetalBrain.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">סקירה מכוונת למוח העובר</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">נוירולוגיית העובר</span>
+              </a>
+
+            </div>
+          </div>
+        </span>
+        <a class="svc-navlink" href="Home.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">יצירת קשר</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section data-screen-label="Hero" style="position:relative;padding:96px 80px 64px;overflow:hidden;background:linear-gradient(180deg,#FCFAF6 0%,#FFFFFF 100%);">
+    <div id="svc-hero-grid" style="position:relative;z-index:1;max-width:1240px;margin:0 auto;text-align:center;">
+      <div data-reveal="" style="display: inline-flex; align-items: center; color: #8C7A64; font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; background-color: #FCFBF6"></div>
+      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(46px,6vw,80px);line-height:1.08;margin:0 0 26px;color:#1F1A17;letter-spacing:-1px;">שירותים <span style="color:#866e59;">רפואיים</span></h1>
+      <p style="font-size:17px;color:#4A463F;margin:0 auto;max-width:48ch;line-height:1.9;font-weight:300;">מגוון שירותי אולטרסאונד מתקדמים במיילדות וגינקולוגיה,<br>בסטנדרטים הגבוהים ביותר וביחס אישי ומקצועי.</p>
+    </div>
+  </section>
+
+  <!-- ===== SERVICE CARDS ===== -->
+  <section style="padding:24px 48px 44px;background:linear-gradient(180deg,#FEFEFE 0%,#FEFEFE 100%);">
+    <div id="svc-cards-grid" style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <!-- CARD — Pregnancy ultrasound -->
+      <a class="svc-card" data-reveal="" href="Pregnancy.dc.html" style="text-decoration:none;color:inherit;position:relative;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:28px;box-shadow:0 12px 36px -22px rgba(140,122,100,0.18);padding:56px 34px 44px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;cursor:pointer;">
+        <div class="svc-icon-wrap" style="position:relative;z-index:1;width:132px;height:132px;border-radius:50%;background:#FBF8F4;border:1px solid #F3EDE4;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;overflow:hidden;">
+          <img src="assets/pregnancy-icon.png" alt="" style="width:146%;height:146%;object-fit:contain;margin-left:-6px;">
+        </div>
+        <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(22px,2vw,27px);color:#1F1A17;margin:0 0 14px;letter-spacing:0.2px;line-height:1.25;">אולטרסאונד בהריון</h2>
+        <p style="font-size:15px;color:#5D554B;margin:0 0 34px;font-weight:300;max-width:30ch;line-height:1.8;">ליווי אולטרסאונד מקצועי לאורך ההריון, מהבדיקות הראשונות ועד להערכה מתקדמת של התפתחות העובר.</p>
+        <span class="svc-cta-circle" style="margin-top:auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+        </span>
+      </a>
+
+      <!-- CARD — Gynecological -->
+      <a class="svc-card" data-reveal="" href="Gynecological.dc.html" style="text-decoration:none;color:inherit;position:relative;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:28px;box-shadow:0 12px 36px -22px rgba(140,122,100,0.18);padding:56px 34px 44px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;cursor:pointer;">
+        <div class="svc-icon-wrap" style="position:relative;z-index:1;width:132px;height:132px;border-radius:50%;background:#FBF8F4;border:1px solid #F3EDE4;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;overflow:hidden;">
+          <img src="assets/gynecological-icon.png" alt="" style="width:90%;height:90%;object-fit:contain;">
+        </div>
+        <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(22px,2vw,27px);color:#1F1A17;margin:0 0 14px;letter-spacing:0.2px;line-height:1.25;">אולטרסאונד גינקולוגי</h2>
+        <p style="font-size:15px;color:#5D554B;margin:0 0 34px;font-weight:300;max-width:30ch;line-height:1.8;">בדיקות אולטרסאונד להערכת הרחם, השחלות והאגן, לצורך אבחון ומעקב מדויק.</p>
+        <span class="svc-cta-circle" style="margin-top:auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+        </span>
+      </a>
+
+      <!-- CARD — Fetal brain (featured) -->
+      <a class="svc-card" data-reveal="" href="FetalBrain.dc.html" style="text-decoration:none;color:inherit;position:relative;background:#FFFFFF;border:1px solid #EBE2D6;border-radius:28px;box-shadow:0 18px 48px -24px rgba(140,122,100,0.26);padding:56px 34px 44px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;cursor:pointer;">
+        <div class="svc-icon-wrap" style="position:relative;z-index:1;width:132px;height:132px;border-radius:50%;background:#FBF8F4;border:1px solid #F3EDE4;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;overflow:hidden;">
+          <img src="assets/fetal-brain-icon.png" alt="" style="width:160%;height:160%;object-fit:contain;margin-left:-8px;">
+        </div>
+        <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(22px,2vw,27px);color:#1F1A17;margin:0 0 14px;letter-spacing:0.2px;line-height:1.25;">סקירה מכוונת למוח העובר</h2>
+        <p style="font-size:15px;color:#5D554B;margin:0 0 34px;font-weight:300;max-width:30ch;line-height:1.8;">הערכה ממוקדת ומעמיקה של מוח העובר, מתוך מומחיות ייחודית ודיוק אבחוני.</p>
+        <span class="svc-cta-circle" style="margin-top:auto;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== CLOSING TAGLINE ===== -->
+  <sc-if value="{{ showClosingBand }}" hint-placeholder-val="{{ true }}">
+    
+  </sc-if>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#fbf9f8;border-top:1px solid #E7DDD1;margin-top:120px;">
+    <div style="max-width:1240px;margin:0 auto;padding:48px 48px 36px;">
+      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;">
+
+        <!-- Brand -->
+        <div>
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
+              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+            </div>
+            <span style="flex:none;display:inline-flex;margin-top:2px;">
+              <img src="assets/flower-sprig.png" alt="" style="display:block;height:64px;width:auto;">
+            </span>
+          </div>
+          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">רפואה מדויקת, רגישה ומקצועית לאורך הדרך — בליווי אישי בכל שלבי החיים.</p>
+        </div>
+
+        <!-- Quick nav -->
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">ניווט מהיר</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <a class="svc-foot-link" href="Home.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">עמוד הבית</a>
+            <a class="svc-foot-link" href="About.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אודות</a>
+            <a class="svc-foot-link" href="Services.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">שירותים רפואיים</a>
+            <a class="svc-foot-link" href="Home.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">יצירת קשר</a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">שירותים</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <a class="svc-foot-link" href="FetalBrain.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">סקירה מכוונת למוח העובר</a>
+            <a class="svc-foot-link" href="Pregnancy.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד בהריון</a>
+            <a class="svc-foot-link" href="Gynecological.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד גינקולוגי</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">פרטי התקשרות</div>
+          <div style="display:flex;flex-direction:column;gap:15px;">
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">052-1234567</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">info@dr-masarwa.co.il</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
+              <span style="font-size:15px;color:#5A5048;font-weight:300;">תל אביב, ישראל</span>
+              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:56px;padding-top:30px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none" stroke="#C7B299" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
+        <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© כל הזכויות שמורות לד״ר עביר מסארוה</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1280, &quot;height&quot;: 1600 },
+  &quot;showClosingBand&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const SEL = 'h1,h2,h3,p,[data-reveal]';
+    try {
+      const root = document.querySelector('[data-anim]') || document.body;
+      if (root.classList) root.classList.add('anim-ready');
+      const all = Array.from(root.querySelectorAll(SEL));
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const force = (el) => { el.style.setProperty('transition', 'none', 'important'); el.style.setProperty('opacity', '1', 'important'); el.style.setProperty('transform', 'none', 'important'); };
+      if (reduced) { all.forEach(force); return; }
+      const show = (el) => {
+        const sibs = Array.from(el.parentElement.children).filter(c => c.matches && c.matches(SEL));
+        const i = Math.max(0, sibs.indexOf(el));
+        el.style.setProperty('transition-delay', Math.min(i * 90, 360) + 'ms');
+        el.style.setProperty('opacity', '1', 'important');
+        el.style.setProperty('transform', 'none', 'important');
+      };
+      let pending = all.slice();
+      const vh = () => window.innerHeight || document.documentElement.clientHeight || 800;
+      const inView = (el) => { const r = el.getBoundingClientRect(); return r.top < vh() * 0.94 && r.bottom > 0; };
+      const tick = () => {
+        pending = pending.filter(el => { if (inView(el)) { show(el); return false; } return true; });
+        if (!pending.length) { window.removeEventListener('scroll', tick); window.removeEventListener('resize', tick); }
+      };
+      requestAnimationFrame(tick);
+      window.addEventListener('scroll', tick, { passive: true });
+      window.addEventListener('resize', tick);
+      setTimeout(() => { all.forEach(force); }, 2000);
+    } catch (err) {
+      document.querySelectorAll(SEL).forEach(el => { el.style.setProperty('opacity', '1', 'important'); el.style.setProperty('transform', 'none', 'important'); });
+    }
+  }
+  renderVals() {
+    return {
+      showClosingBand: this.props.showClosingBand ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>
