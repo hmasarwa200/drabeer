@@ -300,7 +300,9 @@
     "משמעות קלינית אפשרית": ["Possible clinical significance", "الدلالة السريرية المحتملة"],
     "מעבר לזיהוי הממצא, הבדיקה מסייעת בהבנת המשמעות הרפואית האפשרית ובהערכת ההשלכות העתידיות.": ["Beyond identifying the finding, the scan helps understand its possible medical significance and assess future implications.", "إلى جانب رصد النتيجة، يساعد الفحص في فهم دلالتها الطبية المحتملة وتقييم تبعاتها المستقبلية."],
     "מדוע חשוב שהבדיקה תתבצע על ידי גניקולוג מומחה בתחום?": ["Why should the scan be performed by a specialist gynecologist?", "لماذا من المهم أن يُجري الفحص طبيب نسائي مختص في المجال؟"],
-    "הערכת מוח העובר דורשת מיומנות גבוהה, ניסיון רב והיכרות מעמיקה עם שלבי ההתפתחות התקינים של מערכת העצבים לאורך ההיריון. מדובר בתחום ייחודי המשלב ידע מתקדם באולטרסאונד מיילדותי, נוירולוגיה עוברית והדמיה עוברית. פענוח מדויק של הממצאים מאפשר להבדיל בין וריאציות תקינות לבין סימנים המחייבים בירור נוסף, ולהעניק להורים מידע אמין ומבוסס לצורך קבלת החלטות.": ["Assessing the fetal brain requires great skill, extensive experience and deep familiarity with the normal developmental stages of the nervous system throughout pregnancy. It is a unique field combining advanced knowledge in obstetric ultrasound, fetal neurology and fetal imaging. Accurate interpretation of the findings makes it possible to distinguish normal variations from signs requiring further evaluation, and to give parents reliable, well-founded information for decision-making.", "يتطلب تقييم دماغ الجنين مهارة عالية وخبرة واسعة ومعرفة معمّقة بمراحل التطوّر الطبيعية للجهاز العصبي على مدار الحمل. إنه مجال فريد يجمع بين معرفة متقدمة في الأولتراساوند التوليدي وطب أعصاب الجنين والتصوير الجنيني. يتيح التفسير الدقيق للنتائج التمييز بين التنوّعات الطبيعية والعلامات التي تستدعي توضيحاً إضافياً، ومنح الوالدين معلومات موثوقة ومدروسة لاتخاذ القرارات."]
+    "הערכת מוח העובר דורשת מיומנות גבוהה, ניסיון רב והיכרות מעמיקה עם שלבי ההתפתחות התקינים של מערכת העצבים לאורך ההיריון. מדובר בתחום ייחודי המשלב ידע מתקדם באולטרסאונד מיילדותי, נוירולוגיה עוברית והדמיה עוברית. פענוח מדויק של הממצאים מאפשר להבדיל בין וריאציות תקינות לבין סימנים המחייבים בירור נוסף, ולהעניק להורים מידע אמין ומבוסס לצורך קבלת החלטות.": ["Assessing the fetal brain requires great skill, extensive experience and deep familiarity with the normal developmental stages of the nervous system throughout pregnancy. It is a unique field combining advanced knowledge in obstetric ultrasound, fetal neurology and fetal imaging. Accurate interpretation of the findings makes it possible to distinguish normal variations from signs requiring further evaluation, and to give parents reliable, well-founded information for decision-making.", "يتطلب تقييم دماغ الجنين مهارة عالية وخبرة واسعة ومعرفة معمّقة بمراحل التطوّر الطبيعية للجهاز العصبي على مدار الحمل. إنه مجال فريد يجمع بين معرفة متقدمة في الأولتراساوند التوليدي وطب أعصاب الجنين والتصوير الجنيني. يتيح التفسير الدقيق للنتائج التمييز بين التنوّعات الطبيعية والعلامات التي تستدعي توضيحاً إضافياً، ومنح الوالدين معلومات موثوقة ومدروسة لاتخاذ القرارات."],
+    "תפריט ניווט": ["Navigation menu", "قائمة التنقل"],
+    "סגירת תפריט": ["Close menu", "إغلاق القائمة"]
   };
 
   var LANG_KEY = 'site-lang';
@@ -373,6 +375,18 @@
       var wantAlign = isLtr ? (orig === 'right' ? 'left' : 'right') : orig;
       if (ae.style.textAlign !== wantAlign) ae.style.textAlign = wantAlign;
     }
+    // flip one-sided inline auto margins in LTR mode (dir doesn't flip those)
+    var mEls = document.body.querySelectorAll('[style*="auto"]');
+    for (var q = 0; q < mEls.length; q++) {
+      var me = mEls[q];
+      if (me.closest && me.closest('#i18n-switcher')) continue;
+      if (me.__heML == null) { me.__heML = me.style.marginLeft || ''; me.__heMR = me.style.marginRight || ''; }
+      var hml = me.__heML, hmr = me.__heMR;
+      if ((hml === 'auto') === (hmr === 'auto')) continue;
+      var wantML = isLtr ? hmr : hml, wantMR = isLtr ? hml : hmr;
+      if (me.style.marginLeft !== wantML) me.style.marginLeft = wantML;
+      if (me.style.marginRight !== wantMR) me.style.marginRight = wantMR;
+    }
     document.body.classList.toggle('i18n-ar', lang === 'ar');
     updateSwitcher();
     requestAnimationFrame(function () { applying = false; });
@@ -415,7 +429,8 @@
       '#i18n-switcher.is-open > button [data-chev] { transform:rotate(180deg); }' +
       '#i18n-switcher > button [data-chev] { transition:transform .22s ease; }' +
       '#i18n-switcher [data-menu] button:hover { background:#F7F1E8; }' +
-      '#i18n-switcher [data-menu] button:hover [data-code] { color:#866e59; }';
+      '#i18n-switcher [data-menu] button:hover [data-code] { color:#866e59; }' +
+      '@media (max-width:720px){ #i18n-switcher > button [data-lang-full]{display:none;} #i18n-switcher > button [data-lang-short]{display:inline;} #i18n-switcher > button{padding:8px 12px;} }';
     document.head.appendChild(st);
   }
 
@@ -439,7 +454,8 @@
     btn.type = 'button';
     btn.setAttribute('aria-label', 'Change language');
     btn.style.cssText = 'appearance:none;display:flex;align-items:center;gap:7px;background:#F8F4EE;border:1px solid #E7DDD1;border-radius:999px;padding:8px 14px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;line-height:1;color:#4A463F;transition:background .2s, border-color .2s;';
-    btn.innerHTML = GLOBE + '<span>' + cur[1] + '</span><svg data-chev width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>';
+    var SHORT = { he: 'עב', en: 'EN', ar: 'ع' };
+    btn.innerHTML = GLOBE + '<span data-lang-full>' + cur[1] + '</span><span data-lang-short style="display:none;">' + (SHORT[cur[0]] || cur[0]) + '</span><svg data-chev width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>';
 
     var menu = document.createElement('div');
     menu.setAttribute('data-menu', '');
@@ -536,6 +552,11 @@
         }
       });
       mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+      // mobile drawer: close on nav link tap
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('#svc-nav a') : null;
+        if (a) { var t = document.getElementById('nav-toggle'); if (t) t.checked = false; }
+      });
       // watchdog: a re-mount can still wipe the switcher — rebuild it if it disappears
       setInterval(function () {
         var el = document.getElementById('i18n-switcher');

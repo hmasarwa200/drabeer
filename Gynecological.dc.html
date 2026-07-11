@@ -77,16 +77,26 @@
   }
   [data-sub]:hover [data-subcaret]{ color:#866e59; }
 
-  /* ===== mobile header + layout ===== */
+  /* ===== mobile header: hamburger side drawer ===== */
+  #nav-burger, #nav-backdrop, #nav-close{ display:none; }
   @media (max-width: 720px){
-    header > div{ grid-template-columns:1fr !important; padding:10px 16px 8px !important; gap:8px !important; }
-    header > div > a{ gap:10px !important; }
+    header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
+    header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }
-    header > div > a > span:last-child > span:first-child{ font-size:16.5px !important; }
-    header > div > a > span:last-child > span:last-child{ font-size:10.5px !important; }
-    #svc-nav{ gap:20px !important; overflow-x:auto; padding:0 2px 4px; scrollbar-width:none; justify-content:flex-start !important; }
-    #svc-nav::-webkit-scrollbar{ display:none; }
-    #svc-nav .svc-navlink{ font-size:14px !important; }
+    header > div > a > span:last-child > span:first-child{ font-size:16px !important; }
+    header > div > a > span:last-child > span:last-child{ font-size:10px !important; }
+    #i18n-switcher{ order:2; }
+    #nav-burger{ order:3; display:flex; flex-direction:column; justify-content:center; gap:5px; width:42px; height:42px; flex:none; padding:0 11px; border-radius:12px; border:1px solid #E7DDD1; background:#F8F4EE; cursor:pointer; box-sizing:border-box; }
+    #nav-burger span{ display:block; height:2px; border-radius:2px; background:#4A463F; }
+    #nav-backdrop{ display:block; position:fixed; inset:0; background:rgba(42,40,37,0.35); opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1001; }
+    #nav-toggle:checked ~ #nav-backdrop{ opacity:1; pointer-events:auto; }
+    #nav-close{ position:fixed; top:14px; inset-inline-end:14px; width:42px; height:42px; border-radius:50%; background:#F8F4EE; border:1px solid #E7DDD1; cursor:pointer; z-index:1003; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    #nav-toggle:checked ~ #nav-close{ display:flex; opacity:1; pointer-events:auto; }
+    #svc-nav{ position:fixed; top:0; bottom:0; inset-inline-end:0; width:min(300px,80vw); background:#FFFFFF; display:flex; flex-direction:column; align-items:stretch !important; justify-content:flex-start; gap:0 !important; padding:80px 26px 30px; box-shadow:0 0 90px rgba(80,62,44,0.3); transform:translateX(-100%); transition:transform .45s cubic-bezier(.22,.61,.36,1); z-index:1002; overflow-y:auto; }
+    html[lang="en"] #svc-nav{ transform:translateX(100%); }
+    #nav-toggle:checked ~ #svc-nav{ transform:translateX(0) !important; }
+    #svc-nav .svc-navlink{ font-size:16.5px !important; padding:16px 2px; border-bottom:1px solid #F4EEE6; width:100%; box-sizing:border-box; }
+    #svc-nav > [data-svc-dd]{ width:100%; }
     [data-svc-menu]{ display:none !important; }
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
@@ -108,6 +118,10 @@
           <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
         </span>
       </a>
+      <input type="checkbox" id="nav-toggle" style="display:none;">
+      <label for="nav-toggle" id="nav-burger" aria-label="תפריט ניווט"><span></span><span></span><span></span></label>
+      <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
+      <label for="nav-toggle" id="nav-close" aria-label="סגירת תפריט"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
       <nav id="svc-nav" style="display:flex;align-items:center;gap:40px;">
         <a class="svc-navlink" href="Home.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">עמוד הבית</a>
         <a class="svc-navlink" href="About.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">אודות</a>
