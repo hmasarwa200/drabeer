@@ -495,7 +495,7 @@
           if (!r.height) return false;
           var pad = parseFloat(getComputedStyle(hd).paddingRight) || 0;
           var hr = h.getBoundingClientRect();
-          wrap.style.top = Math.max(8, hr.top + (hr.height - wrap.offsetHeight) / 2) + 'px';
+          wrap.style.top = window.innerWidth <= 720 ? (hr.top + 10) + 'px' : Math.max(8, hr.top + (hr.height - wrap.offsetHeight) / 2) + 'px';
           wrap.style.right = Math.max(14, window.innerWidth - r.right + pad) + 'px';
           return true;
         };

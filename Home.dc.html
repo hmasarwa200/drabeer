@@ -117,6 +117,29 @@
     #feat-grid{grid-template-columns:1fr !important;text-align:center;}
     #feat-grid p{margin-left:auto;margin-right:auto;}
   }
+
+  /* ===== mobile header + layout ===== */
+  @media (max-width: 720px){
+    header > div{ grid-template-columns:1fr !important; padding:10px 16px 8px !important; gap:8px !important; }
+    header > div > a{ gap:10px !important; }
+    header > div > a img{ height:38px !important; }
+    header > div > a > span:last-child > span:first-child{ font-size:16.5px !important; }
+    header > div > a > span:last-child > span:last-child{ font-size:10.5px !important; }
+    #svc-nav{ gap:20px !important; overflow-x:auto; padding:0 2px 4px; scrollbar-width:none; justify-content:flex-start !important; }
+    #svc-nav::-webkit-scrollbar{ display:none; }
+    #svc-nav .svc-navlink{ font-size:14px !important; }
+    [data-svc-menu]{ display:none !important; }
+    section{ padding-left:22px !important; padding-right:22px !important; }
+  }
+
+  @media (max-width: 720px){
+    #hero-portrait .hero-photo{ width:min(507px,86vw) !important; height:auto !important; }
+    .hero-arch{ width:min(430px,72vw) !important; height:min(463px,78vw) !important; }
+    #about-grid{ grid-template-columns:1fr !important; gap:44px !important; }
+    #about-grid p{ font-size:15px !important; line-height:1.9 !important; }
+    #about-grid h2{ font-size:29px !important; }
+    #about-grid .about-portrait{ max-width:300px; }
+  }
 </style>
 <script src="i18n.js?v=5"></script>
 </helmet>
@@ -235,7 +258,7 @@
   <!-- ===== ABOUT PREVIEW ===== -->
   <section style="position:relative;overflow:hidden;background:linear-gradient(#FBF8F6 0%,#FCFAF8 30%,#FEFEFE 62%);padding:100px 48px;">
     <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;">
-      <div style="display:grid;grid-template-columns:0.85fr 1fr;gap:72px;align-items:center;">
+      <div id="about-grid" style="display:grid;grid-template-columns:0.85fr 1fr;gap:72px;align-items:center;">
 
         <!-- Portrait right -->
         <div data-reveal="" class="about-reveal" style="display:flex;justify-content:center;align-items:flex-end;">
@@ -265,7 +288,7 @@
 
 
   <!-- ===== PREGNANCY ULTRASOUND EDUCATION ===== -->
-  <section style="background: #FEFEFE; padding: 100px 48px 108px; width: 1143px; height: 65px">
+  <section style="background: #FEFEFE; padding: 0 48px">
     <div style="max-width:1180px;margin:0 auto;">
       
       
