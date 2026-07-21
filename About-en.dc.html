@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@
   .svc-menu-link:hover{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-sub]{ position: relative; }
   [data-submenu]{ position:absolute; top:-8px; inset-inline-start:100%; padding-inline-start:22px; opacity:0; visibility:hidden; transform:translateX(-10px); transition:opacity .28s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1), visibility .28s; z-index:61; }
-  [dir="rtl"] [data-submenu]{ transform:translateX(10px); }
+  [dir="ltr"] [data-submenu]{ transform:translateX(10px); }
   [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ opacity:1; visibility:visible; transform:translateX(0); }
   [data-sub]:hover > .svc-menu-link{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
@@ -124,77 +124,79 @@
     html[lang="en"] #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:scaleX(-1) rotate(-90deg) !important; }
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
+
+  html[lang="en"] svg:has(> path[d="M15 6l-6 6 6 6"]) { transform:scaleX(-1); }
 </style>
 </helmet>
 
-<div dir="rtl" id="top" data-anim="" style="font-family:'Assistant',sans-serif;background:#FEFEFE;color:#2A2825;min-height:100vh;-webkit-font-smoothing:antialiased;">
+<div dir="ltr" id="top" data-anim="" style="font-family:'Assistant',sans-serif;background:#FEFEFE;color:#2A2825;min-height:100vh;-webkit-font-smoothing:antialiased;">
 
     <!-- ===== HEADER ===== -->
   <header style="position:sticky;top:0;z-index:50;background:rgba(254,254,254,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E7DDD1;">
     <div style="max-width:1240px;margin:0 auto;padding:12px 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;">
-      <a href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:14px;">
+      <a href="Home-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:14px;">
         <span style="flex:none;display:inline-flex;">
-          <img src="assets/logo-cropped.png" alt="לוגו" style="display:block;height:58px;width:auto;">
+          <img src="assets/logo-cropped.png" alt="Logo" style="display:block;height:58px;width:auto;">
         </span>
-        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:right;">
-          <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
-          <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:left;">
+          <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
+          <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
         </span>
       </a>
       <input type="checkbox" id="nav-toggle" style="display:none;">
-      <label for="nav-toggle" id="nav-burger" aria-label="תפריט ניווט"><span></span><span></span><span></span></label>
+      <label for="nav-toggle" id="nav-burger" aria-label="Navigation menu"><span></span><span></span><span></span></label>
       <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
-      <label for="nav-toggle" id="nav-close" aria-label="סגירת תפריט"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
+      <label for="nav-toggle" id="nav-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
       <nav id="svc-nav" style="display:flex;align-items:center;gap:40px;">
-        <a class="svc-navlink" href="Home.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">עמוד הבית</a>
-        <a class="svc-navlink is-active" href="About.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;">אודות</a>
+        <a class="svc-navlink" href="Home-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Home</a>
+        <a class="svc-navlink is-active" href="About-en.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;">About</a>
         <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
-          <a class="svc-navlink" href="Services.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">שירותים רפואיים<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
+          <a class="svc-navlink" href="Services-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">Medical Services<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
           <div data-svc-menu="">
             <div style="min-width:268px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:8px;">
 
               <div data-sub="" style="position:relative;">
-                <a class="svc-menu-link" href="Pregnancy.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                  <span style="display:flex;flex-direction:column;gap:3px;text-align:right;">
-                    <span style="font-size:14.5px;font-weight:500;">אולטרסאונד בהריון</span>
-                    <span style="font-size:12px;color:#A89888;font-weight:300;">כל בדיקות ההריון</span>
+                <a class="svc-menu-link" href="Pregnancy-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                  <span style="display:flex;flex-direction:column;gap:3px;text-align:left;">
+                    <span style="font-size:14.5px;font-weight:500;">Pregnancy Ultrasound</span>
+                    <span style="font-size:12px;color:#A89888;font-weight:300;">All pregnancy scans</span>
                   </span>
                   <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B49B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
                 </a>
                 <div data-submenu="">
                   <div style="min-width:266px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:18px;box-shadow:0 28px 64px -26px rgba(80,62,44,0.32), 0 6px 20px -12px rgba(80,62,44,0.14);padding:10px;">
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון צעיר</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">שקיפות עורפית</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מוקדמת</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות מאוחרת</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירת מערכות שלישית</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למוח העובר</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">סקירה מכוונת למומים אחרים</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">גדילת העובר ובדיקת זרימות בדופלר</a>
-                    <a class="svc-menu-link" href="Pregnancy.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">הריון מרובה עוברים</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Pregnancy</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Nuchal Translucency</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
                   </div>
                 </div>
               </div>
 
-              <a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">אולטרסאונד גינקולוגי</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">בריאות האישה</span>
+              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">Women's Health</span>
               </a>
 
-              <a class="svc-menu-link" href="FetalBrain.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:right;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">סקירה מכוונת למוח העובר</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">נוירולוגיית העובר</span>
+              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
+                <span style="font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</span>
+                <span style="font-size:12px;color:#A89888;font-weight:300;">Fetal Neurology</span>
               </a>
 
             </div>
           </div>
         </span>
-        <a class="svc-navlink" href="Home.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">יצירת קשר</a>
+        <a class="svc-navlink" href="Home-en.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
       </nav>
       <span data-svc-dd="" dir="ltr" style="position:relative;display:inline-flex;align-items:center;justify-self:end;">
-        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:#F8F4EE;border:1px solid #E7DDD1;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>עברית<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:#F8F4EE;border:1px solid #E7DDD1;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
         <div data-svc-menu="" style="inset-inline-end:0;inset-inline-start:auto;">
-          <div style="min-width:190px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:6px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="About.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:#F8F4EE;font-size:13.5px;font-weight:700;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#866e59;color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">HE</span><span style="flex:1;">עברית</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="About-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">EN</span><span style="flex:1;">English</span></a><a class="svc-menu-link" href="About-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">AR</span><span style="flex:1;">العربية</span></a></div>
+          <div style="min-width:190px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:6px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="About.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">HE</span><span style="flex:1;">עברית</span></a><a class="svc-menu-link" href="About-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:#F8F4EE;font-size:13.5px;font-weight:700;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#866e59;color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">EN</span><span style="flex:1;">English</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="About-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">AR</span><span style="flex:1;">العربية</span></a></div>
         </div>
       </span>
     </div>
@@ -206,20 +208,20 @@
 
       <!-- intro -->
       <div style="text-align:center;">
-        <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,4.6vw,62px);color:#1F1E1B;margin:0;letter-spacing:0.3px;">ד״ר עביר <span style="color:#866e59;">מסארוה</span></h1>
-        <p data-reveal="" style="font-size:16px;color:#928272;font-weight:500;letter-spacing:0.5px;margin:16px 0 0;">מומחית באולטרסאונד מיילדותי וגינקולוגי</p>
+        <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,4.6vw,62px);color:#1F1E1B;margin:0;letter-spacing:0.3px;">Dr. Abeer <span style="color:#866e59;">Masarwa</span></h1>
+        <p data-reveal="" style="font-size:16px;color:#928272;font-weight:500;letter-spacing:0.5px;margin:16px 0 0;">Specialist in Obstetric & Gynecologic Ultrasound</p>
         <div data-reveal="" style="width:64px;height:1px;background:#C8B8A8;margin:34px auto 40px;animation:ab-float 5s ease-in-out infinite;"></div>
       </div>
 
       <!-- bio: text + portrait -->
       <div class="ab-bio-grid" style="display:grid;grid-template-columns:1fr 0.68fr;gap:64px;align-items:center;">
         <div>
-        <p style="font-size:18.5px;line-height:2.05;color:#2A2825;margin:0 0 24px;font-weight:300;">ד״ר עביר מסארוה היא רופאה בכירה ביחידת האולטרסאונד המיילדותי והגינקולוגי ובמרפאה לנוירולוגיה של העובר במרכז הרפואי שיבא, תל השומר, ואחראית על שירות האולטרסאונד הגינקולוגי של קופת חולים מכבי בעיר טייבה. בעבודתה היא משלבת ניסיון קליני מתקדם לצד עשייה מחקרית בתחום הדמיית מוח העובר.</p>
-        <p style="font-size:18.5px;line-height:2.05;color:#2A2825;margin:0;font-weight:300;">הכשרתה כוללת דיפלומה בנוירולוגיה של העובר מטעם Fetal Medicine Barcelona והשתלמות ייעודית ב־MRI מוח עוברי ב־Oregon Health &amp; Science University שבארצות הברית. הניסיון שלה במרפאה הנוירולוגית של העובר והרקע המחקרי, מאפשרים לה להביא אל כל בדיקה דיוק אבחנתי לצד קשב אישי, ולהעניק למטופלותיה ליווי רגוע, מדויק ואנושי.</p>
+        <p style="font-size:18.5px;line-height:2.05;color:#2A2825;margin:0 0 24px;font-weight:300;">Dr. Abeer Masarwa is a senior physician in the Obstetric & Gynecologic Ultrasound Unit and the Fetal Neurology Clinic at Sheba Medical Center, Tel Hashomer, and is responsible for the gynecologic ultrasound service of Maccabi Health Services in Tayibe. Her work combines advanced clinical experience with research in fetal brain imaging.</p>
+        <p style="font-size:18.5px;line-height:2.05;color:#2A2825;margin:0;font-weight:300;">הכשרתה כוללת Diploma in fetal neurology מטעם Fetal Medicine Barcelona וFellowship ייעודית ב־MRI מוח עוברי ב־Oregon Health &amp; Science University שבארצות הברית. הניסיון שלה במרפאה הנוירולוגית של העובר והרקע הResearchי, מאפשרים לה להביא אל כל בדיקה דיוק אבחנתי לצד קשב אישי, ולהעניק למטופלותיה ליווי רגוע, מדויק ואנושי.</p>
         </div>
         <div data-reveal="" style="display:flex;justify-content:center;">
           <div class="ab-portrait" style="position:relative;width:100%;max-width:310px;background:linear-gradient(180deg,#F5EDE4 0%,#EEE2D4 100%);border-radius:190px 190px 16px 16px;padding:34px 20px 0;overflow:hidden;box-shadow:0 34px 64px -32px rgba(146,130,114,0.4);">
-            <img src="assets/about-portrait.png" alt="ד״ר עביר מסארוה" style="display:block;width:100%;height:auto;">
+            <img src="assets/about-portrait.png" alt="Dr. Abeer Masarwa" style="display:block;width:100%;height:auto;">
           </div>
         </div>
       </div>
@@ -227,32 +229,32 @@
       <!-- Academic section -->
       <div class="ab-edu-grid" style="max-width:1000px;margin:88px auto 0;">
         <div>
-          <div data-reveal="" style="font-family:'Frank Ruhl Libre',serif;font-size:31px;font-weight:500;color:#26211C;letter-spacing:0.3px;">לימודים אקדמיים</div>
+          <div data-reveal="" style="font-family:'Frank Ruhl Libre',serif;font-size:31px;font-weight:500;color:#26211C;letter-spacing:0.3px;">Academic studies</div>
           <div class="ab-track" style="width:56px;height:2px;background:#C7B299;border-radius:2px;margin-top:16px;"></div>
           <ul style="list-style:none;padding:0;margin:12px 0 0;display:flex;flex-direction:column;">
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">לימודי רפואה</span>
-              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">ביה"ס לרפואה הדסה עין כרם, האוניברסיטה העברית בירושלים</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Medical studies</span>
+              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">Hadassah Ein Kerem School of Medicine, The Hebrew University of Jerusalem</span>
             </li>
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">התמחות במיילדות וגינקולוגיה</span>
-              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">בית החולים בילינסון</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Residency in obstetrics & gynecology</span>
+              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">Beilinson Hospital</span>
             </li>
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">לימודי המשך באולטרסאונד במיילדות וגינקולוגיה</span>
-              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">אוניברסיטת תל אביב</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Continuing studies in obstetric & gynecologic ultrasound</span>
+              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">Tel Aviv University</span>
             </li>
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">תואר שני במחקר קליני</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Master's degree in clinical research</span>
               <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">Oregon Health &amp; Science University בארצות הברית</span>
             </li>
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">השתלמות ב־MRI מוח עוברי</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Training in fetal brain MRI</span>
               <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">Oregon Health &amp; Science University בארצות הברית</span>
             </li>
             <li class="edu-item" style="padding:13px 0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">דיפלומה בנוירולוגיה של העובר</span>
-              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">אוניברסיטת ברצלונה - Fetal Medicine Barcelona בספרד</span>
+              <span class="edu-title" style="font-family:'Frank Ruhl Libre',serif;font-size:18.5px;font-weight:500;color:#26211C;">Diploma in fetal neurology</span>
+              <span style="font-size:14.5px;font-weight:300;color:#928272;line-height:1.65;">University of Barcelona — Fetal Medicine Barcelona, Spain</span>
             </li>
           </ul>
         </div>
@@ -269,40 +271,40 @@
         <div>
           <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;">
             <div style="display:flex;flex-direction:column;gap:6px;">
-              <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">ד״ר עביר מסארוה</span>
-              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">מומחית באולטרסאונד מיילדותי וגינקולוגי</span>
+              <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
+              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
             </div>
             <span style="flex:none;display:inline-flex;margin-top:2px;">
               <img src="assets/flower-sprig.png" alt="" style="display:block;height:64px;width:auto;">
             </span>
           </div>
-          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">רפואה מדויקת, רגישה ומקצועית לאורך הדרך — בליווי אישי בכל שלבי החיים.</p>
+          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">Precise, sensitive and professional care throughout — with personal guidance at every stage of life.</p>
         </div>
 
         <!-- Quick nav -->
         <div>
-          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">ניווט מהיר</div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Quick links</div>
           <div style="display:flex;flex-direction:column;gap:13px;">
-            <a class="svc-foot-link" href="Home.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">עמוד הבית</a>
-            <a class="svc-foot-link" href="About.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אודות</a>
-            <a class="svc-foot-link" href="Services.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">שירותים רפואיים</a>
-            <a class="svc-foot-link" href="Home.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">יצירת קשר</a>
+            <a class="svc-foot-link" href="Home-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Home</a>
+            <a class="svc-foot-link" href="About-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">About</a>
+            <a class="svc-foot-link" href="Services-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Medical Services</a>
+            <a class="svc-foot-link" href="Home-en.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">Contact</a>
           </div>
         </div>
 
         <!-- Services -->
         <div>
-          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">שירותים</div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Services</div>
           <div style="display:flex;flex-direction:column;gap:13px;">
-            <a class="svc-foot-link" href="FetalBrain.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">סקירה מכוונת למוח העובר</a>
-            <a class="svc-foot-link" href="Pregnancy.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד בהריון</a>
-            <a class="svc-foot-link" href="Gynecological.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">אולטרסאונד גינקולוגי</a>
+            <a class="svc-foot-link" href="FetalBrain-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Targeted Fetal Brain Scan</a>
+            <a class="svc-foot-link" href="Pregnancy-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Pregnancy Ultrasound</a>
+            <a class="svc-foot-link" href="Gynecological-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Gynecologic Ultrasound</a>
           </div>
         </div>
 
         <!-- Contact -->
         <div>
-          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">פרטי התקשרות</div>
+          <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Contact details</div>
           <div style="display:flex;flex-direction:column;gap:15px;">
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
               <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">052-1234567</span>
@@ -313,7 +315,7 @@
               <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
             </div>
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;">תל אביב, ישראל</span>
+              <span style="font-size:15px;color:#5A5048;font-weight:300;">Tel Aviv, Israel</span>
               <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
             </div>
           </div>
@@ -323,7 +325,7 @@
 
       <div style="margin-top:56px;padding-top:30px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:14px;">
         <svg width="40" height="16" viewBox="0 0 40 16" fill="none" stroke="#C7B299" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
-        <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© כל הזכויות שמורות לד״ר עביר מסארוה</span>
+        <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© All rights reserved to Dr. Abeer Masarwa</span>
       </div>
     </div>
   </footer>
