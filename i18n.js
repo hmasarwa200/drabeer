@@ -302,7 +302,12 @@
     "מדוע חשוב שהבדיקה תתבצע על ידי גניקולוג מומחה בתחום?": ["Why should the scan be performed by a specialist gynecologist?", "لماذا من المهم أن يُجري الفحص طبيب نسائي مختص في المجال؟"],
     "הערכת מוח העובר דורשת מיומנות גבוהה, ניסיון רב והיכרות מעמיקה עם שלבי ההתפתחות התקינים של מערכת העצבים לאורך ההיריון. מדובר בתחום ייחודי המשלב ידע מתקדם באולטרסאונד מיילדותי, נוירולוגיה עוברית והדמיה עוברית. פענוח מדויק של הממצאים מאפשר להבדיל בין וריאציות תקינות לבין סימנים המחייבים בירור נוסף, ולהעניק להורים מידע אמין ומבוסס לצורך קבלת החלטות.": ["Assessing the fetal brain requires great skill, extensive experience and deep familiarity with the normal developmental stages of the nervous system throughout pregnancy. It is a unique field combining advanced knowledge in obstetric ultrasound, fetal neurology and fetal imaging. Accurate interpretation of the findings makes it possible to distinguish normal variations from signs requiring further evaluation, and to give parents reliable, well-founded information for decision-making.", "يتطلب تقييم دماغ الجنين مهارة عالية وخبرة واسعة ومعرفة معمّقة بمراحل التطوّر الطبيعية للجهاز العصبي على مدار الحمل. إنه مجال فريد يجمع بين معرفة متقدمة في الأولتراساوند التوليدي وطب أعصاب الجنين والتصوير الجنيني. يتيح التفسير الدقيق للنتائج التمييز بين التنوّعات الطبيعية والعلامات التي تستدعي توضيحاً إضافياً، ومنح الوالدين معلومات موثوقة ومدروسة لاتخاذ القرارات."],
     "תפריט ניווט": ["Navigation menu", "قائمة التنقل"],
-    "סגירת תפריט": ["Close menu", "إغلاق القائمة"]
+    "סגירת תפריט": ["Close menu", "إغلاق القائمة"],
+    "מרכז רפואי שיבא, תל השומר": ["Sheba Medical Center, Tel Hashomer", "مركز شيبا الطبي، تل هشومير"],
+    "היחידה לאולטרסאונד מיילדותי וגינקולוגי": ["Obstetric & Gynecologic Ultrasound Unit", "وحدة الأولتراساوند التوليدي والنسائي"],
+    "נוירולוגיה של העובר": ["Fetal Neurology", "طب أعصاب الجنين"],
+    "לקביעת תור ולפרטים נוספים": ["To book an appointment or for more details", "لتحديد موعد ولمزيد من التفاصيل"],
+    "ליווי אישי ומקצועי": ["Personal, professional care", "مرافقة شخصية ومهنية"]
   };
 
   var LANG_KEY = 'site-lang';
