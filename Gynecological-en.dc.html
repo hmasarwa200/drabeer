@@ -19,8 +19,10 @@
   .svc-navlink{ position: relative; }
   .svc-navlink::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
-  .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
+  .svc-foot-link{ text-decoration:none; transition:color .25s ease; position:relative; }
+  .svc-foot-link::after{ content:""; position:absolute; right:0; bottom:-3px; height:1px; width:0; background:#BA9571; transition:width .3s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
+  .svc-foot-link:hover::after{ width:100%; }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
   details > summary { list-style: none; cursor: pointer; outline: none; }
@@ -60,7 +62,7 @@
   .svc-menu-link:hover{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-sub]{ position: relative; }
   [data-submenu]{ position:absolute; top:-8px; inset-inline-start:100%; padding-inline-start:22px; opacity:0; visibility:hidden; transform:translateX(-10px); transition:opacity .28s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1), visibility .28s; z-index:61; }
-  [dir="ltr"] [data-submenu]{ transform:translateX(10px); }
+  [dir="rtl"] [data-submenu]{ transform:translateX(10px); }
   [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ opacity:1; visibility:visible; transform:translateX(0); }
   [data-sub]:hover > .svc-menu-link{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
@@ -115,8 +117,6 @@
     html[lang="en"] #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:scaleX(-1) rotate(-90deg) !important; }
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
-
-  html[lang="en"] svg:has(> path[d="M15 6l-6 6 6 6"]) { transform:scaleX(-1); }
 </style>
 </helmet>
 
@@ -129,7 +129,7 @@
         <span style="flex:none;display:inline-flex;">
           <img src="assets/logo-cropped.png" alt="Logo" style="display:block;height:58px;width:auto;">
         </span>
-        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:left;">
+        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:right;">
           <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
           <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
         </span>
@@ -144,50 +144,45 @@
         <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
           <a class="svc-navlink is-active" href="Services-en.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">Medical Services<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
           <div data-svc-menu="">
-            <div style="min-width:268px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:8px;">
+            <div style="width:280px;background:#FFFFFF;border-radius:18px;box-shadow:0 24px 48px -24px rgba(80,62,44,0.22);padding:8px;display:flex;flex-direction:column;">
 
               <div data-sub="" style="position:relative;">
-                <a class="svc-menu-link" href="Pregnancy-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                  <span style="display:flex;flex-direction:column;gap:3px;text-align:left;">
-                    <span style="font-size:14.5px;font-weight:500;">Pregnancy Ultrasound</span>
-                    <span style="font-size:12px;color:#A89888;font-weight:300;">All pregnancy scans</span>
-                  </span>
-                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B49B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
+                <a class="svc-menu-link" href="Pregnancy-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">
+                  Pregnancy Ultrasound
+                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
                 </a>
                 <div data-submenu="">
-                  <div style="min-width:266px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:18px;box-shadow:0 28px 64px -26px rgba(80,62,44,0.32), 0 6px 20px -12px rgba(80,62,44,0.14);padding:10px;">
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Pregnancy</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Nuchal Translucency</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
+                  <div style="width:260px;background:#FFFFFF;border-radius:18px;box-shadow:0 24px 48px -24px rgba(80,62,44,0.22);padding:8px;">
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-young" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Early Pregnancy</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-nt" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Nuchal Translucency</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
                   </div>
                 </div>
               </div>
 
-              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">Women's Health</span>
-              </a>
+              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</a>
 
-              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">Fetal Neurology</span>
-              </a>
+              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</a>
+
+              <a class="svc-menu-link" href="PregnancyFollowUp-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Low-Risk Pregnancy Follow-Up</a>
+
+              <a class="svc-menu-link" href="GynecologicalCounseling-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Ongoing Gynecological Consultation & IUDs</a>
 
             </div>
           </div>
         </span>
-        <a class="svc-navlink" href="Home-en.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
+        <a class="svc-navlink" href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
       </nav>
       <span data-svc-dd="" dir="ltr" style="position:relative;display:inline-flex;align-items:center;justify-self:end;">
-        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:#F8F4EE;border:1px solid #E7DDD1;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-        <div data-svc-menu="" style="inset-inline-end:0;inset-inline-start:auto;">
-          <div style="min-width:190px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:6px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">HE</span><span style="flex:1;">עברית</span></a><a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:#F8F4EE;font-size:13.5px;font-weight:700;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#866e59;color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">EN</span><span style="flex:1;">English</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="Gynecological-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">AR</span><span style="flex:1;">العربية</span></a></div>
+        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,255,255,0.62),rgba(255,255,255,0.26));backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);border:1px solid rgba(255,255,255,0.6);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;box-shadow:0 8px 22px -10px rgba(146,130,114,0.32),inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease;" style-hover="border-color:#C7B299;box-shadow:0 12px 28px -10px rgba(146,130,114,0.42),inset 0 1px 0 rgba(255,255,255,0.75);transform:translateY(-1px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+        <div data-svc-menu="" style="left:50%;right:auto;margin-left:-78px;">
+          <div style="min-width:156px;background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.7);border-radius:15px;box-shadow:0 18px 36px -18px rgba(80,62,44,0.25),inset 0 1px 0 rgba(255,255,255,0.5);padding:5px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">HE</span><span>עברית</span></a><a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#241E18;background:rgba(134,110,89,0.12);font-size:12.5px;font-weight:600;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.2);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#E2C18E,#BA9571);color:#3A2C1C;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">EN</span><span>English</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="Gynecological-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">AR</span><span>العربية</span></a></div>
         </div>
       </span>
     </div>
@@ -197,13 +192,12 @@
   <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#FFFFFF;">
     <div style="position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:60px 48px 56px;display:flex;flex-direction:column;align-items:flex-start;">
       <a href="Services-en.dc.html" data-reveal="" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #F0EAE0;border-radius:999px;padding:8px 16px 8px 14px;font-size:13px;font-weight:600;letter-spacing:0.6px;color:#928272;margin-bottom:30px;transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateX(4px);box-shadow:0 8px 20px rgba(160,135,90,0.14);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>Medical Services</a>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">Women's health · diagnosis & follow-up</span></div>
-      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,5.6vw,76px);line-height:1.04;margin:0;color:#1C1B18;letter-spacing:-1px;">Ultrasound <span style="color:#866e59;">for Gynecology</span></h1>
-      <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;max-width:52ch;">A gynecologic ultrasound provides a professional assessment of the pelvic organs, including Doppler evaluation of blood flow and 3D imaging of the uterine cavity, for personalized diagnosis.</p>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">Women's Health · Diagnosis & Follow-up</span></div>
+      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,5.6vw,76px);line-height:1.04;margin:0;color:#1C1B18;letter-spacing:-1px;">Gynecologic <span style="color:#866e59;">Ultrasound</span></h1>
+      <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;">Gynecologic ultrasound allows for a professional assessment of the pelvic organs, including Doppler evaluation of blood flow and 3D imaging of the uterine cavity, for personalized diagnosis.</p>
       <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;">
-        <a class="stage-pill" href="#when"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">1</span>When to get checked</a>
-        <a class="stage-pill" href="#checked"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">2</span>What is examined</a>
-        <a class="stage-pill" href="#faq"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;display:inline-flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>FAQ</a>
+        <a class="stage-pill" href="#when"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">1</span>When to Come for the Exam</a>
+        <a class="stage-pill" href="#faq"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;display:inline-flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>Frequently Asked Questions</a>
       </div>
     </div>
   </section>
@@ -217,22 +211,22 @@
         <div class="stage-head">
           <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">01</div>
           <div>
-            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">When to get checked</div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">When to Come for the Exam</div>
           </div>
         </div>
         <div>
-          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;max-width:52ch;">The scan suits both routine follow-up and focused evaluation, as needed.</p>
+          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;">The exam is suited for both routine follow-up and focused evaluation, as needed.</p>
           <div style="display:flex;flex-direction:column;gap:14px;">
             <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
               <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
                 <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">01</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">A routine check as part of periodic follow-up</span>
+                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">Routine exam as part of periodic follow-up</span>
               </div>
             </div>
             <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
               <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
                 <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">02</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">Evaluating complaints — pain, irregular bleeding or discomfort</span>
+                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">Evaluating complaints: pain, irregular bleeding or discomfort</span>
               </div>
             </div>
             <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
@@ -244,82 +238,49 @@
             <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
               <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
                 <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">04</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">A recommendation or referral from your physician</span>
+                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">As part of an infertility work-up</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 02 CHECKED -->
-      <div id="checked" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+      <!-- 02 FAQ -->
+      <div id="faq" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 24px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
         <div class="stage-head">
           <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">02</div>
           <div>
-            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">What is examined</div>
-            <div style="font-size:13.5px;color:#A08F7D;margin-top:8px;font-weight:400;">Pelvic organs</div>
-          </div>
-        </div>
-        <div class="gyn-checks" data-reveal="" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
-            <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">01</span>
-            <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">Uterus</h3>
-            <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">Structure, size and position, and identifying findings such as fibroids.</p>
-          </div>
-          <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
-            <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">02</span>
-            <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">Endometrium</h3>
-            <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">Thickness and appearance of the lining, according to the cycle stage.</p>
-          </div>
-          <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
-            <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">03</span>
-            <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">Ovaries</h3>
-            <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">Structure, size and detection of cysts or other findings.</p>
-          </div>
-          <div data-cell="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;padding:26px 28px;">
-            <span style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;margin-bottom:16px;">04</span>
-            <h3 style="font-family:'Assistant',sans-serif;font-weight:600;font-size:18px;color:#241E18;margin:0 0 6px;letter-spacing:0.1px;">Pelvic area</h3>
-            <p style="font-size:15.5px;line-height:1.8;color:#6F675E;margin:0;font-weight:300;">The area around the uterus and ovaries, including free fluid.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 FAQ -->
-      <div id="faq" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 24px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
-        <div class="stage-head">
-          <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">03</div>
-          <div>
-            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">FAQ</div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">Frequently Asked Questions</div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;">
           <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
             <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">How is the scan performed?</span>
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">How is the exam performed?</span>
               <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
             </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">The scan is performed using a combined abdominal-vaginal approach when possible, according to medical need.</p>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">The exam is performed using a combined abdominal-transvaginal approach when possible, according to medical need.</p>
           </details>
           <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
             <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">Is special preparation needed?</span>
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">Is special preparation required?</span>
               <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
             </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">In most cases no special preparation is needed. Sometimes you may be asked to arrive with a full bladder or at a specific stage of the menstrual cycle — exact instructions are given when booking.</p>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">In most cases no special preparation is needed. In certain cases you may be asked to arrive with a full bladder or at a specific point in your menstrual cycle — precise instructions will be given when scheduling the appointment.</p>
           </details>
           <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
             <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">How long does the scan take?</span>
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">How long does the exam take?</span>
               <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
             </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">A routine scan usually takes about half an hour, depending on the findings and the purpose of the scan.</p>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">A routine exam usually takes about half an hour, depending on findings and the purpose of the exam.</p>
           </details>
           <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
             <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">Is the scan risky?</span>
+              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">Does the exam carry any risk?</span>
               <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
             </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">It is a standard ultrasound scan — no radiation and no risk.</p>
+            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">This is a standard ultrasound exam, with no radiation, that carries no risk.</p>
           </details>
         </div>
       </div>
@@ -333,28 +294,24 @@
       <div style="position:absolute;top:-90px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(216,194,156,0.18) 0%,rgba(216,194,156,0) 70%);pointer-events:none;"></div>
       <div style="position:relative;z-index:1;">
         <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);color:#FDFBF8;margin:0 0 16px;letter-spacing:0.2px;">Still have questions?</h2>
-        <p style="font-size:17px;line-height:1.8;color:#D9C8B8;margin:0 0 38px;font-weight:300;">Contact us for more information or to book a scan.</p>
-        <a href="Home-en.dc.html#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#FDFBF8;color:#332A21;font-size:15.5px;font-weight:600;letter-spacing:0.4px;padding:16px 42px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(0,0,0,0.45);">Contact<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+        <p style="font-size:17px;line-height:1.8;color:#D9C8B8;margin:0 0 38px;font-weight:300;">Feel free to reach out for more information or to schedule an exam.</p>
+        <a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#FDFBF8;color:#332A21;font-size:15.5px;font-weight:600;letter-spacing:0.4px;padding:16px 42px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(0,0,0,0.45);">Contact<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
       </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer id="contact" style="background:#FCFBF9;border-top:1px solid #F1ECE4;scroll-margin-top:96px;">
-    <div style="max-width:1240px;margin:0 auto;padding:72px 48px 56px;">
-      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;">
+  <footer id="contact" style="background:#FAF8F5;border-top:1px solid #EEE8DE;scroll-margin-top:96px;">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 48px 40px;">
+      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;align-items:center;">
 
-        <div>
-          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:14px;justify-content:center;">
+            <div style="text-align:center;">
               <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
-              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
+              <div style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;margin-top:6px;">Specialist in Obstetric & Gynecologic Ultrasound</div>
             </div>
-            <span style="flex:none;display:inline-flex;margin-top:2px;">
-              <img src="assets/flower-sprig.png" alt="" style="display:block;height:64px;width:auto;">
-            </span>
           </div>
-          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">Precise, sensitive and professional care throughout — with personal guidance at every stage of life.</p>
         </div>
 
         <div>
@@ -363,16 +320,18 @@
             <a class="svc-foot-link" href="Home-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Home</a>
             <a class="svc-foot-link" href="About-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">About</a>
             <a class="svc-foot-link" href="Services-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Medical Services</a>
-            <a class="svc-foot-link" href="Home-en.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">Contact</a>
+            <a class="svc-foot-link" href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="font-size:15px;color:#5A5048;font-weight:300;">Contact</a>
           </div>
         </div>
 
         <div>
           <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Services</div>
           <div style="display:flex;flex-direction:column;gap:13px;">
-            <a class="svc-foot-link" href="FetalBrain-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Targeted Fetal Brain Scan</a>
             <a class="svc-foot-link" href="Pregnancy-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Pregnancy Ultrasound</a>
             <a class="svc-foot-link" href="Gynecological-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Gynecologic Ultrasound</a>
+            <a class="svc-foot-link" href="FetalBrain-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Targeted Fetal Brain Scan</a>
+            <a class="svc-foot-link" href="PregnancyFollowUp-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Low-Risk Pregnancy Follow-Up</a>
+            <a class="svc-foot-link" href="GynecologicalCounseling-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Ongoing Gynecological Consultation & IUDs</a>
           </div>
         </div>
 
@@ -380,24 +339,24 @@
           <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Contact details</div>
           <div style="display:flex;flex-direction:column;gap:15px;">
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">052-1234567</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+              <a href="tel:0974411555" style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;text-decoration:none;">09-7441155</a>
             </div>
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">info@dr-masarwa.co.il</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+              <a href="mailto:dr.abeermassarwa.clinic@gmail.com" style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;text-decoration:none;">dr.abeermassarwa.clinic@gmail.com</a>
             </div>
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;">Tel Aviv, Israel</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+              <span style="font-size:15px;color:#5A5048;font-weight:300;">Beit "Marik", Derech HaSharon 8/10, Kfar Saba</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <div style="margin-top:56px;padding-top:30px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:14px;">
-        <svg width="40" height="16" viewBox="0 0 40 16" fill="none" stroke="#C7B299" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
+      <div style="margin-top:40px;padding-top:20px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <svg width="0" height="0" style="display:none;"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
         <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© All rights reserved to Dr. Abeer Masarwa</span>
       </div>
     </div>
@@ -408,6 +367,85 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   componentDidMount() {
+    // smooth open/close helpers for the scan accordions
+    const EASE = 'cubic-bezier(.33,1,.36,1)';
+    const smoothOpen = (d) => {
+      const p = d.querySelector('[data-svc-desc]');
+      if (p) p.getAnimations().forEach(a => a.cancel());
+      d._closing = false;
+      if (d.open) return;
+      d.open = true;
+      if (p && p.animate) {
+        p.style.overflow = 'hidden';
+        const cs = getComputedStyle(p);
+        const anim = p.animate(
+          [{ height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 },
+           { height: p.scrollHeight + 'px', paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: 1 }],
+          { duration: 380, easing: EASE });
+        anim.onfinish = () => { p.style.overflow = ''; };
+        anim.oncancel = () => { p.style.overflow = ''; };
+      }
+    };
+    const smoothClose = (d) => {
+      if (!d.open || d._closing) return;
+      const p = d.querySelector('[data-svc-desc]');
+      if (!p || !p.animate) { d.open = false; return; }
+      p.getAnimations().forEach(a => a.cancel());
+      d._closing = true;
+      p.style.overflow = 'hidden';
+      const cs = getComputedStyle(p);
+      const anim = p.animate(
+        [{ height: p.scrollHeight + 'px', paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: 1 },
+         { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 }],
+        { duration: 300, easing: EASE });
+      anim.onfinish = () => { p.style.overflow = ''; if (d._closing) { d.open = false; d._closing = false; } };
+      anim.oncancel = () => { p.style.overflow = ''; d._closing = false; };
+    };
+
+    // open + scroll to a scan box when arriving with a #hash
+    const openFromHash = () => {
+      const id = (location.hash || '').replace('#', '');
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el && el.tagName === 'DETAILS') {
+        el.dataset.pinned = '1';
+        smoothOpen(el);
+        setTimeout(() => { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); }, 120);
+      }
+    };
+    setTimeout(openFromHash, 300);
+    window.addEventListener('hashchange', openFromHash);
+
+    // accordion: hover opens a preview, leaving or scrolling closes it;
+    // click pins it open, click again unpins and closes
+    const canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+    const accs = [...document.querySelectorAll('details[data-acc]')];
+    let mx = -1, my = -1, syncQueued = false;
+    const syncHover = () => {
+      syncQueued = false;
+      if (mx < 0) return;
+      const under = document.elementFromPoint(mx, my);
+      const hovered = under ? under.closest('details[data-acc]') : null;
+      accs.forEach(d => {
+        if (d.dataset.pinned) return;
+        if (d === hovered) smoothOpen(d);
+        else smoothClose(d);
+      });
+    };
+    const queueSync = () => { if (!syncQueued) { syncQueued = true; requestAnimationFrame(syncHover); } };
+    if (canHover) {
+      window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; queueSync(); }, { passive: true });
+      window.addEventListener('scroll', queueSync, { passive: true });
+      document.addEventListener('mouseleave', () => { mx = -1; accs.forEach(d => { if (!d.dataset.pinned) smoothClose(d); }); });
+    }
+    accs.forEach(d => {
+      const summary = d.querySelector('summary');
+      if (summary) summary.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (d.dataset.pinned) { delete d.dataset.pinned; smoothClose(d); }
+        else { d.dataset.pinned = '1'; smoothOpen(d); }
+      });
+    });
     const SEL = 'h1,h2,h3,p,[data-reveal]';
     try {
       const root = document.querySelector('[data-anim]') || document.body;

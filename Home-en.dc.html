@@ -19,8 +19,10 @@
   .svc-navlink{ position: relative; }
   .svc-navlink::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
-  .svc-foot-link{ text-decoration:none; transition:color .25s ease; }
+  .svc-foot-link{ text-decoration:none; transition:color .25s ease; position:relative; }
+  .svc-foot-link::after{ content:""; position:absolute; right:0; bottom:-3px; height:1px; width:0; background:#BA9571; transition:width .3s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
+  .svc-foot-link:hover::after{ width:100%; }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } .testimonial-grid{ grid-template-columns:1fr !important; } }
   @media (min-width: 761px) and (max-width: 980px){ .testimonial-grid{ grid-template-columns:1fr 1fr !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
@@ -32,7 +34,7 @@
   .svc-menu-link:hover{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-sub]{ position: relative; }
   [data-submenu]{ position:absolute; top:-8px; inset-inline-start:100%; padding-inline-start:22px; opacity:0; visibility:hidden; transform:translateX(-10px); transition:opacity .28s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1), visibility .28s; z-index:61; }
-  [dir="ltr"] [data-submenu]{ transform:translateX(10px); }
+  [dir="rtl"] [data-submenu]{ transform:translateX(10px); }
   [data-sub]:hover [data-submenu], [data-sub]:focus-within [data-submenu]{ opacity:1; visibility:visible; transform:translateX(0); }
   [data-sub]:hover > .svc-menu-link{ background:#F7F1E8; color:#1F1A17 !important; }
   [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
@@ -48,11 +50,9 @@
   }
   [data-sub]:hover [data-subcaret]{ color:#866e59; }
   @media (prefers-reduced-motion: no-preference){
-    .hero-arch{ animation: hero-arch-in 1.4s cubic-bezier(.22,.61,.36,1) both; }
-    .hero-photo{ animation: hero-photo-in 1.6s .18s cubic-bezier(.19,1,.22,1) both; will-change:transform,opacity,clip-path; }
+    .hero-photo{ animation: hero-photo-in 1.6s .18s cubic-bezier(.19,1,.22,1) both; will-change:transform,opacity; }
   }
-  @keyframes hero-arch-in{ from{ transform:translateX(-50%) translateY(22px); opacity:0; } to{ transform:translateX(-50%) translateY(0); opacity:1; } }
-  @keyframes hero-photo-in{ 0%{ opacity:0; transform:scale(1.06) translateY(12px); clip-path:inset(0 0 6% 0); } 100%{ opacity:1; transform:scale(1) translateY(0); clip-path:inset(0 0 0 0); } }
+  @keyframes hero-photo-in{ 0%{ opacity:0; transform:scale(1.06) translateY(12px); } 100%{ opacity:1; transform:scale(1) translateY(0); } }
   @media (prefers-reduced-motion: no-preference){
     @keyframes heroIn {
       from { opacity: 0; transform: translateY(14px); }
@@ -80,13 +80,20 @@
 
   }
   .hl-item .hl-img{ transition:transform .55s cubic-bezier(.22,.61,.36,1); }
-  .hl-item:hover .hl-img{ transform:translateY(-6px) scale(1.04); }
+  .hl-item:hover .hl-img{ transform:scale(1.14); }
+  #hl-grid{ will-change:transform; }
   .hl-item .hl-title{ position:relative; transition:color .4s ease; }
   .hl-item .hl-title::after{ content:""; position:absolute; right:50%; bottom:-10px; width:0; height:1px; background:#B29B82; transform:translateX(50%); transition:width .5s cubic-bezier(.22,.61,.36,1); }
   .hl-item:hover .hl-title{ color:#866e59; }
   .hl-item:hover .hl-title::after{ width:44px; }
   @media (max-width: 860px){
-    #hl-grid{ grid-template-columns:1fr !important; }
+  .hl-item{ width:44% !important; }
+  }
+  @media (max-width: 1080px){
+    .hl-item{ padding:24px 12px !important; }
+    .hl-item span[style*="width:240px"]{ width:170px !important; height:170px !important; }
+    .hl-item img{ height:75% !important; }
+    .hl-item span[style*="font-size:20px"]{ font-size:16px !important; margin-top:12px !important; }
   }
   .about-portrait{ overflow:hidden; border-radius:190px 190px 16px 16px; box-shadow:0 34px 64px -32px rgba(146,130,114,0.4); }
   .about-portrait img{ will-change: transform; }
@@ -107,18 +114,18 @@
   .about-cta .cta-arrow{ display:inline-block; transition: transform .4s cubic-bezier(.22,.61,.36,1); }
   .about-cta:hover .cta-arrow{ transform:translateX(-5px); }
   @media (max-width: 860px){
-    #hero-inner{grid-template-columns:1fr !important;gap:0 !important;}
-    #hero-text{padding:48px 0 26px !important;text-align:start !important;align-items:flex-start !important;}
-    #hero-text > div:last-child{ display:none !important; }
-    .hero-cta-mobile{ display:flex !important; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin:30px 0 44px; width:100%; }
-    #hero-portrait{max-width:320px;margin:0 auto;}
+    #hero{ aspect-ratio:auto !important; min-height:560px !important; max-height:none !important; }
+    #hero-inner{ min-height:560px !important; }
+    #hero-text{ padding:0 0 48px !important; max-width:100% !important; }
+    #hero-text > .hero-cta-row{ display:none !important; }
+    .hero-cta-mobile{ display:flex !important; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin:24px 0 0; width:100%; }
   }
   @media (max-width: 760px){
     #feat-grid{grid-template-columns:1fr !important;}
   }
 
   /* ===== mobile header: hamburger side drawer ===== */
-  #nav-burger, #nav-backdrop, #nav-close{ display:none; }
+  #nav-burger, #nav-backdrop, #nav-close{ display:none !important; }
   @media (max-width: 880px){
     header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
@@ -132,7 +139,7 @@
     #nav-backdrop{ display:block; position:fixed; inset:0; background:rgba(42,40,37,0.35); opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1001; }
     #nav-toggle:checked ~ #nav-backdrop{ opacity:1; pointer-events:auto; }
     #nav-close{ position:fixed; top:14px; inset-inline-end:14px; width:42px; height:42px; border-radius:50%; background:#F8F4EE; border:1px solid #E7DDD1; cursor:pointer; z-index:1003; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
-    #nav-toggle:checked ~ #nav-close{ display:flex; opacity:1; pointer-events:auto; }
+    #nav-toggle:checked ~ #nav-close{ display:flex !important; opacity:1; pointer-events:auto; }
     #svc-nav{ position:fixed; top:0; bottom:0; inset-inline-end:0; width:min(300px,80vw); background:#FFFFFF; display:flex; flex-direction:column; align-items:stretch !important; justify-content:flex-start; gap:0 !important; padding:80px 26px 30px; box-shadow:0 0 90px rgba(80,62,44,0.3); transform:translateX(-100%); transition:transform .45s cubic-bezier(.22,.61,.36,1); z-index:1002; overflow-y:auto; }
     html[lang="en"] #svc-nav{ transform:translateX(100%); }
     #nav-toggle:checked ~ #svc-nav{ transform:translateX(0) !important; }
@@ -158,138 +165,136 @@
   }
 
   @media (max-width: 860px){
-    #hero-portrait .hero-photo{ width:min(507px,58vw) !important; height:auto !important; }
-    .hero-arch{ width:min(430px,74vw) !important; height:min(463px,79vw) !important; }
     #about-grid{ grid-template-columns:1fr !important; gap:44px !important; }
     #about-grid p{ font-size:15px !important; line-height:1.9 !important; }
     #about-grid h2{ font-size:29px !important; }
     #about-grid .about-portrait{ max-width:300px; }
   }
   html[lang="en"] #about-grid > div:last-child, html[lang="en"] #about-grid > div:last-child h2, html[lang="en"] #about-grid p{ text-align:left !important; direction:ltr; }
-
-  html[lang="en"] svg:has(> path[d="M15 6l-6 6 6 6"]) { transform:scaleX(-1); }
 </style>
 </helmet>
 
 <div dir="ltr" id="home" data-anim="" style="font-family:'Assistant',sans-serif;background:#FEFEFE;color:#2A2825;min-height:100vh;-webkit-font-smoothing:antialiased;">
 
     <!-- ===== HEADER ===== -->
-  <header style="position:sticky;top:0;z-index:50;background:rgba(254,254,254,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E7DDD1;">
+  <header style="position:sticky;top:0;z-index:50;background:linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,255,255,0.28));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,255,255,0.5);box-shadow:0 8px 32px -18px rgba(80,62,44,0.22);">
     <div style="max-width:1240px;margin:0 auto;padding:12px 80px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;">
       <a href="Home-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:14px;">
         <span style="flex:none;display:inline-flex;">
           <img src="assets/logo-cropped.png" alt="Logo" style="display:block;height:58px;width:auto;">
         </span>
-        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:left;">
+        <span style="display:flex;flex-direction:column;gap:3px;line-height:1.25;text-align:right;">
           <span style="font-family:'Frank Ruhl Libre',serif;font-size:21px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
           <span style="font-size:12px;color:#A89888;letter-spacing:0.5px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
         </span>
       </a>
       <input type="checkbox" id="nav-toggle" style="display:none;">
-      <label for="nav-toggle" id="nav-burger" aria-label="Navigation menu"><span></span><span></span><span></span></label>
-      <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
-      <label for="nav-toggle" id="nav-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
       <nav id="svc-nav" style="display:flex;align-items:center;gap:40px;">
         <a class="svc-navlink is-active" href="Home-en.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;">Home</a>
         <a class="svc-navlink" href="About-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">About</a>
         <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
           <a class="svc-navlink" href="Services-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">Medical Services<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
           <div data-svc-menu="">
-            <div style="min-width:268px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:8px;">
+            <div style="width:280px;background:#FFFFFF;border-radius:18px;box-shadow:0 24px 48px -24px rgba(80,62,44,0.22);padding:8px;display:flex;flex-direction:column;">
 
               <div data-sub="" style="position:relative;">
-                <a class="svc-menu-link" href="Pregnancy-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                  <span style="display:flex;flex-direction:column;gap:3px;text-align:left;">
-                    <span style="font-size:14.5px;font-weight:500;">Pregnancy Ultrasound</span>
-                    <span style="font-size:12px;color:#A89888;font-weight:300;">All pregnancy scans</span>
-                  </span>
-                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B49B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
+                <a class="svc-menu-link" href="Pregnancy-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">
+                  Pregnancy Ultrasound
+                  <svg data-subcaret="" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transition:color .2s ease;"><path d="M15 6l-6 6 6 6"></path></svg>
                 </a>
                 <div data-submenu="">
-                  <div style="min-width:266px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:18px;box-shadow:0 28px 64px -26px rgba(80,62,44,0.32), 0 6px 20px -12px rgba(80,62,44,0.14);padding:10px;">
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-young" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Pregnancy</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-nt" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Nuchal Translucency</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:flex;align-items:center;justify-content:flex-start;text-align:start;gap:11px;padding:11px 16px;border-radius:11px;color:#3A352E;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
+                  <div style="width:260px;background:#FFFFFF;border-radius:18px;box-shadow:0 24px 48px -24px rgba(80,62,44,0.22);padding:8px;">
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-young" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Early Pregnancy</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-nt" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Nuchal Translucency</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
+                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
                   </div>
                 </div>
               </div>
 
-              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">Women's Health</span>
-              </a>
+              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</a>
 
-              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;text-align:left;padding:13px 14px;border-radius:11px;color:#3A352E;">
-                <span style="font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</span>
-                <span style="font-size:12px;color:#A89888;font-weight:300;">Fetal Neurology</span>
-              </a>
+              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</a>
+
+              <a class="svc-menu-link" href="PregnancyFollowUp-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Low-Risk Pregnancy Follow-Up</a>
+
+              <a class="svc-menu-link" href="GynecologicalCounseling-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Ongoing Gynecological Consultation & IUDs</a>
 
             </div>
           </div>
         </span>
-        <a class="svc-navlink" href="Home-en.dc.html#contact" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
+        <a class="svc-navlink" href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
       </nav>
       <span data-svc-dd="" dir="ltr" style="position:relative;display:inline-flex;align-items:center;justify-self:end;">
-        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:#F8F4EE;border:1px solid #E7DDD1;border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-        <div data-svc-menu="" style="inset-inline-end:0;inset-inline-start:auto;">
-          <div style="min-width:190px;background:#FFFFFF;border:1px solid #F0EAE2;border-radius:16px;box-shadow:0 24px 60px -24px rgba(80,62,44,0.3);padding:6px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">HE</span><span style="flex:1;">עברית</span></a><a class="svc-menu-link" href="Home-en.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:#F8F4EE;font-size:13.5px;font-weight:700;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#866e59;color:#FFFFFF;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">EN</span><span style="flex:1;">English</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="Home-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;color:#241E18;background:transparent;font-size:13.5px;font-weight:500;"><span style="flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:#F3EDE4;color:#8A7A68;font-size:10.5px;font-weight:700;letter-spacing:0.5px;">AR</span><span style="flex:1;">العربية</span></a></div>
+        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,255,255,0.62),rgba(255,255,255,0.26));backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);border:1px solid rgba(255,255,255,0.6);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;box-shadow:0 8px 22px -10px rgba(146,130,114,0.32),inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease;" style-hover="border-color:#C7B299;box-shadow:0 12px 28px -10px rgba(146,130,114,0.42),inset 0 1px 0 rgba(255,255,255,0.75);transform:translateY(-1px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+        <div data-svc-menu="" style="left:50%;right:auto;margin-left:-78px;">
+          <div style="min-width:156px;background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.7);border-radius:15px;box-shadow:0 18px 36px -18px rgba(80,62,44,0.25),inset 0 1px 0 rgba(255,255,255,0.5);padding:5px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">HE</span><span>עברית</span></a><a class="svc-menu-link" href="Home-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#241E18;background:rgba(134,110,89,0.12);font-size:12.5px;font-weight:600;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.2);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#E2C18E,#BA9571);color:#3A2C1C;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">EN</span><span>English</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="Home-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">AR</span><span>العربية</span></a></div>
         </div>
       </span>
     </div>
+    <label for="nav-toggle" id="nav-burger" aria-label="Navigation menu"><span></span><span></span><span></span></label>
+    <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
+    <label for="nav-toggle" id="nav-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
   </header>
 
   <!-- ===== HERO ===== -->
-  <section id="hero" style="position:relative;background:linear-gradient(180deg,#FBF6F2 0%,#FDFAF7 100%);overflow:hidden;">
-    <div style="position:absolute;top:-160px;left:-120px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(200,175,140,0.13) 0%,rgba(200,175,140,0) 65%);pointer-events:none;"></div>
-    
-  <div id="hero-inner" style="position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:end;">
+  <section id="hero" style="position:relative;width:100%;aspect-ratio:1.9/1;min-height:520px;max-height:820px;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:#EFE9DC url('uploads/IMG_8819.jpeg') no-repeat 38% 22%;background-size:100% auto;"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(80% 90% at 85% 100%,rgba(74,54,36,0.08) 0%,rgba(74,54,36,0.02) 45%,rgba(74,54,36,0) 72%);"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(245deg,rgba(74,54,36,0.2) 0%,rgba(74,54,36,0.1) 30%,rgba(74,54,36,0.02) 58%,rgba(74,54,36,0) 78%);"></div>
 
-      <!-- Text (right in RTL) -->
-      <div id="hero-text" style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:72px 0 88px;min-width:0;">
-        <div data-reveal="" style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">Obstetric & Gynecologic Ultrasound</span></div>
-        <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:500;font-size:clamp(38px,4.8vw,72px);line-height:1.1;margin:0;color:#201f1d;letter-spacing:0.2px;">A first look<br><span style="color:#866e59;">at a new world</span></h1>
-        <p style="font-family: 'Frank Ruhl Libre',serif; font-size: clamp(20px,2.2vw,32px); font-weight: 400; color: #A89888; margin: 18px 0 0; letter-spacing: 0.4px;">Dr. Abeer Masarwa</p>
-        <p style="font-size:clamp(16px,1.5vw,20px);font-weight:300;color:#4A463F;margin:20px 0 0;line-height:1.8;max-width:40ch;">Specialist in Obstetric & Gynecologic Ultrasound<sc-if value="{{ showShibaLine }}" hint-placeholder-val="{{ true }}"><br>Senior physician at Sheba Medical Center, Tel Hashomer</sc-if></p>
-        <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;">
-          <a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#332A21;color:#FDFBF8;font-size:15px;font-weight:600;letter-spacing:0.3px;padding:15px 34px;border-radius:999px;transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 18px 36px -14px rgba(51,42,33,0.45);">Medical Services<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
-          <a href="Home-en.dc.html#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#5A5048;font-size:15px;font-weight:500;letter-spacing:0.3px;padding:15px 30px;border-radius:999px;border:1px solid #DACFBF;transition:border-color .3s ease,color .3s ease,background .3s ease;" style-hover="border-color:#866e59;color:#1F1A17;background:rgba(255,255,255,0.6);">Contact</a>
+    <div style="position:absolute;top:28px;left:0;right:0;height:1px;background:rgba(255,255,255,0.25);pointer-events:none;"></div>
+
+    <div id="hero-inner" style="position:absolute;inset:0;z-index:2;max-width:1180px;margin:0 auto;padding:0 48px;display:flex;align-items:flex-end;justify-content:flex-end;">
+      <div id="hero-text" style="display:flex;flex-direction:column;align-items:flex-end;text-align:right;padding:56px 0 64px;min-width:0;max-width:760px;">
+        <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:600;font-size:clamp(48px,6vw,84px);line-height:1.1;margin:0;color:#FDFBF8;letter-spacing:0.2px;text-shadow:0 4px 16px rgba(0,0,0,0.4),0 1px 4px rgba(0,0,0,0.35);">A first look<br><span style="color:#F0D9B0;text-shadow:0 0 30px rgba(227,199,154,0.35),0 4px 16px rgba(0,0,0,0.4);">at a new world</span></h1>
+        <div style="width:44px;height:1.5px;background:#E3C79A;opacity:0.7;margin:28px 0 0;"></div>
+        <p style="font-size:19px;font-weight:700;letter-spacing:0.2px;color:#FFFFFF;margin:24px 0 0;line-height:1.6;max-width:52ch;text-shadow:0 4px 18px rgba(0,0,0,0.55),0 1px 5px rgba(0,0,0,0.5);">Specialist in Obstetric & Gynecologic Ultrasound<sc-if value="{{ showShibaLine }}" hint-placeholder-val="{{ true }}"><br><span style="color:#F0D9B0;font-weight:800;">Senior physician at Sheba Medical Center, Tel Hashomer</span></sc-if></p>
+        <div data-reveal="" class="hero-cta-row" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;">
+          <a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(226,193,142,0.95),rgba(186,149,113,0.95));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);color:#3A2C1C;font-size:14px;font-weight:700;letter-spacing:0.3px;padding:16px 32px;border-radius:999px;box-shadow:0 16px 32px -14px rgba(0,0,0,0.5);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 22px 42px -14px rgba(0,0,0,0.6);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Medical Services</a>
+          <a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,0.1);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);color:#FDFBF8;font-size:14px;font-weight:500;letter-spacing:0.3px;padding:15px 28px;border-radius:999px;border:1px solid rgba(255,255,255,0.4);transition:border-color .3s ease,background .3s ease;" style-hover="border-color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.18);">Contact</a>
         </div>
       </div>
 
-      <!-- Portrait (left in RTL) -->
-      <div id="hero-portrait" style="position:relative;display:flex;justify-content:center;align-items:flex-end;align-self:end;min-width:0;">
-        <span class="hero-arch" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 84.8%; max-width: 430px; aspect-ratio: 430 / 463; background: linear-gradient(180deg,#F1E6D8 0%,#E9DAC6 100%); border-radius: 999px 999px 0 0"></span>
-        
-      <img class="hero-photo" src="assets/dr-hero.png" alt="Dr. Abeer Masarwa" style="position: relative; display: block; width: 100%; max-width: 507px; height: auto; aspect-ratio: 507 / 488; object-fit: scale-down"></div>
+      <div class="hero-cta-mobile" style="display:none;"><a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#8A6F52;color:#FDFBF8;font-size:13.5px;font-weight:600;letter-spacing:0.3px;padding:11px 22px;border-radius:999px;box-shadow:0 14px 28px -12px rgba(92,70,51,0.45);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Medical Services</a><a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#5A5048;font-size:13.5px;font-weight:500;letter-spacing:0.3px;padding:10px 20px;border-radius:999px;border:1px solid rgba(205,173,142,0.55);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Contact</a></div>
+    </div>
+  </section>
 
-      <div class="hero-cta-mobile" style="display:none;"><a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#332A21;color:#FDFBF8;font-size:15px;font-weight:600;letter-spacing:0.3px;padding:15px 34px;border-radius:999px;" style-hover="box-shadow:0 18px 36px -14px rgba(51,42,33,0.45);">Medical Services<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a><a href="Home-en.dc.html#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#5A5048;font-size:15px;font-weight:500;letter-spacing:0.3px;padding:15px 30px;border-radius:999px;border:1px solid #DACFBF;" style-hover="border-color:#866e59;color:#1F1A17;">Contact</a></div>
 
-    </div></section>
 
   <!-- ===== 3 SERVICE HIGHLIGHTS ===== -->
-  <section style="background:#FEFEFE;padding:64px 48px 80px;">
-    <div style="max-width:1080px;margin:0 auto 0;text-align:center;padding-bottom:44px;">
-      <div style="width:40px;height:1px;background:#C8B8A8;margin:0 auto 26px;"></div>
+  <section style="background:#FEFEFE;padding:120px 48px 140px;">
+    <div style="max-width:1080px;margin:0 auto 0;text-align:center;padding-bottom:80px;">
+      <div style="width:40px;height:1px;background:#E9D3BC;margin:0 auto 26px;"></div>
       <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(24px,2.6vw,36px);color:#1F1E1B;margin:0;letter-spacing:0.2px;">A professional, in-depth look</h2>
     </div>
-    <div id="hl-grid" style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
-      <a class="hl-item" href="Pregnancy-en.dc.html" style="cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 20px;">
-        <span style="display:flex;align-items:center;justify-content:center;width:190px;height:190px;"><img class="hl-img" src="assets/pregnancy-icon.png" alt="" style="width:190px;height:190px;object-fit:contain;"></span>
-        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#26211C;line-height:1.35;margin-top:26px;">Obstetric Ultrasound</span>
+    <div style="max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;">
+      <a class="hl-item" href="Pregnancy-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/pregnancy-icon-recolored.png" alt="" style="width:auto;height:158px;flex:none;"></span>
+        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Obstetric Ultrasound</span>
       </a>
-      <a class="hl-item" href="Gynecological-en.dc.html" style="cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 20px;">
-        <span style="display:flex;align-items:center;justify-content:center;width:190px;height:190px;"><img class="hl-img" src="assets/gynecological-icon.png" alt="" style="width:150px;height:150px;object-fit:contain;"></span>
-        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#26211C;line-height:1.35;margin-top:26px;">Gynecologic Ultrasound</span>
+      <a class="hl-item" href="Gynecological-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/gynecological-icon-recolored.png" alt="" style="width:auto;height:172px;flex:none;"></span>
+        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Gynecologic Ultrasound</span>
       </a>
-      <a class="hl-item" href="FetalBrain-en.dc.html" style="cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 20px;">
-        <span style="display:flex;align-items:center;justify-content:center;width:190px;height:190px;"><img class="hl-img" src="assets/fetal-brain-icon.png" alt="" style="width:200px;height:200px;object-fit:contain;"></span>
-        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#26211C;line-height:1.35;margin-top:26px;">Targeted Fetal Brain Scan</span>
+      <a class="hl-item" href="FetalBrain-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/fetal-brain-icon-recolored.png" alt="" style="width:auto;height:174px;flex:none;"></span>
+        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Targeted Fetal Brain Scan</span>
+      </a>
+    </div>
+    <div style="max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:56px;flex-wrap:wrap;">
+      <a class="hl-item" href="PregnancyFollowUp-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/pregnancy-followup-icon-recolored.png" alt="" style="width:auto;height:140px;flex:none;"></span>
+        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Low-Risk Pregnancy Follow-Up</span>
+      </a>
+      <a class="hl-item" href="GynecologicalCounseling-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/gynecological-counseling-icon-recolored.png" alt="" style="width:auto;height:246px;flex:none;"></span>
+        <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Ongoing Gynecological Consultation & IUDs</span>
       </a>
     </div>
   </section>
@@ -307,14 +312,11 @@
         </div>
 
         <!-- Text left -->
-        <div style="text-align:left;">
-          <div data-reveal="" style="font-size:12px;font-weight:600;letter-spacing:3px;color:#928272;margin-bottom:18px;">About</div>
-          <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(30px,3.2vw,46px);color:#1F1E1B;margin:0 0 22px;letter-spacing:0.2px;">Dr. Abeer Masarwa</h2>
-          <div data-reveal="" style="width:48px;height:1px;background:#C8B8A8;margin:0 auto 28px 0;"></div>
-          <p style="font-size:17px;line-height:2;color:#2A2825;margin:0 0 20px;font-weight:300;">Dr. Abeer Masarwa is a senior physician in the Obstetric & Gynecologic Ultrasound Unit and the Fetal Neurology Clinic at Sheba Medical Center, Tel Hashomer.</p>
-          <p style="font-size:17px;line-height:2;color:#2A2825;margin:0 0 20px;font-weight:300;">Dr. Masarwa holds a diploma in Fetal Neurology from Fetal Medicine Barcelona and completed dedicated training in fetal brain MRI in Oregon, USA.</p>
-          <div data-reveal="" style="margin-top:36px;">
-            <a class="about-cta" href="About-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;color:#928272;font-size:14px;font-weight:500;letter-spacing:0.8px;padding:13px 36px;border:1px solid #CEC6BE;border-radius:100px;transition:border-color .4s,background .4s,color .4s,box-shadow .4s;" style-hover="border-color:#866e59;background:#866e59;color:#FFFFFF;box-shadow:0 14px 28px -12px rgba(134,110,89,0.45);">Read more<span class="cta-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></span></a>
+        <div style="text-align:right;">
+          <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(30px,3.2vw,46px);color:#1F1E1B;margin:0 0 28px;letter-spacing:0.2px;">Dr. Abeer Masarwa</h2>
+          <p style="font-size:18px;line-height:1.95;color:#2A2825;margin:0;font-weight:300;">Dr. Abeer Masarwa is a senior physician in obstetric and gynecologic ultrasound, working at Sheba Medical Center, Tel Hashomer, in the Ultrasound Unit and the Fetal Neurology Clinic. Alongside her work at Sheba, she heads the gynecologic ultrasound service at Maccabi Healthcare Services in Tayibe. Her work spans pregnancy ultrasound exams, targeted scans, fetal brain imaging, and advanced clinical and research experience in this field.</p>
+          <div data-reveal="" style="margin-top:34px;">
+            <a class="about-cta" href="About-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(226,193,142,0.95),rgba(186,149,113,0.95));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);color:#3A2C1C;font-size:14px;font-weight:700;letter-spacing:0.3px;padding:16px 32px;border-radius:999px;box-shadow:0 16px 32px -14px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 22px 42px -14px rgba(0,0,0,0.45);">Read more<span class="cta-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></span></a>
           </div>
         </div>
 
@@ -339,7 +341,7 @@
 
 
     <!-- ===== TESTIMONIALS ===== -->
-  <section style="background:#FBFAF8;padding:100px 48px 108px;border-top:1px solid #F1EEE8;">
+  <section style="background:#FFFFFF;padding:100px 48px 108px;border-top:1px solid #F1EEE8;">
     <div style="max-width:1180px;margin:0 auto;">
       <div style="text-align:center;max-width:680px;margin:0 auto 60px;">
         <div data-reveal="" style="width:40px;height:1px;background:#C8B8A8;margin:0 auto 30px;"></div>
@@ -347,16 +349,11 @@
         <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(30px,3.2vw,46px);color:#1F1E1B;margin:0;letter-spacing:0.2px;">What patients say</h2>
       </div>
 
-      <div class="testimonial-grid" data-reveal="" style="background:#FFFFFF;border:1px solid #EFEBE4;border-radius:18px;max-width:720px;margin:0 auto;min-height:220px;display:flex;align-items:center;justify-content:center;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:18px;">
-          <span style="width:64px;height:64px;border-radius:50%;background:#F6F3EE;display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#C7B299" stroke="none"><path d="M10 7H6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v2a2 2 0 0 1-2 2H5v2h1a4 4 0 0 0 4-4V7zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v2a2 2 0 0 1-2 2h-1v2h1a4 4 0 0 0 4-4V7z"></path></svg>
-          </span>
-          <div style="text-align:center;">
-            <div style="font-size:13px;color:#928272;font-weight:500;letter-spacing:0.5px;">Testimonials</div>
-            <div style="font-size:14px;color:#A89888;margin-top:8px;font-weight:300;">Coming soon</div>
-          </div>
-        </div>
+      <div class="testimonial-grid" data-reveal="" style="background:#FFFFFF;border:1px solid #EFEBE4;border-radius:18px;max-width:920px;margin:0 auto;min-height:210px;overflow:hidden;">
+        <iframe frameborder="0" height="210" width="100%" allowfullscreen="" src="https://www.medreviews.co.il/provider/dr-massarwa-abeer/reviews-widget?show-header=false&amp;slide-switch-interval=4500&amp;bg=ffffff&amp;controls-color=&amp;r-text-color=&amp;date-color=&amp;main-text=&amp;only-favorite=&amp;logo=" style="display:block;border:none;"></iframe>
+      </div>
+      <div style="text-align:center;margin-top:22px;">
+        <a href="https://www.medreviews.co.il/provider/dr-massarwa-abeer" target="_blank" rel="noopener" style="font-size:13.5px;color:#928272;text-decoration:underline;">See all reviews of Dr. Abeer Masarwa on MedReviews.co.il</a>
       </div>
     </div>
   </section>
@@ -364,22 +361,18 @@
 
 
     <!-- ===== FOOTER ===== -->
-  <footer id="contact" style="background:#FBFAF8;border-top:1px solid #EAE4DB;scroll-margin-top:96px;">
-    <div style="max-width:1240px;margin:0 auto;padding:72px 48px 56px;">
-      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;">
+  <footer id="contact" style="background:#FAF8F5;border-top:1px solid #EEE8DE;scroll-margin-top:96px;">
+    <div style="max-width:1240px;margin:0 auto;padding:72px 48px 40px;">
+      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;align-items:center;">
 
         <!-- Brand -->
-        <div>
-          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:18px;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:14px;justify-content:center;">
+            <div style="text-align:center;">
               <span style="font-family:'Frank Ruhl Libre',serif;font-size:23px;font-weight:500;color:#1F1A17;letter-spacing:0.3px;">Dr. Abeer Masarwa</span>
-              <span style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;">Specialist in Obstetric & Gynecologic Ultrasound</span>
+              <div style="font-size:13px;color:#A89888;letter-spacing:0.4px;font-weight:300;margin-top:6px;">Specialist in Obstetric & Gynecologic Ultrasound</div>
             </div>
-            <span style="flex:none;display:inline-flex;margin-top:2px;">
-              <img src="assets/flower-sprig.png" alt="" style="display:block;height:64px;width:auto;">
-            </span>
           </div>
-          <p style="font-size:15px;line-height:1.85;color:#6F655B;margin:0;font-weight:300;max-width:34ch;">Precise, sensitive and professional care throughout — with personal guidance at every stage of life.</p>
         </div>
 
         <!-- Quick nav -->
@@ -389,7 +382,7 @@
             <a class="svc-foot-link" href="Home-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Home</a>
             <a class="svc-foot-link" href="About-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">About</a>
             <a class="svc-foot-link" href="Services-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Medical Services</a>
-            <a class="svc-foot-link" href="Home-en.dc.html#contact" style="font-size:15px;color:#5A5048;font-weight:300;">Contact</a>
+            <a class="svc-foot-link" href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="font-size:15px;color:#5A5048;font-weight:300;">Contact</a>
           </div>
         </div>
 
@@ -397,9 +390,11 @@
         <div>
           <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Services</div>
           <div style="display:flex;flex-direction:column;gap:13px;">
-            <a class="svc-foot-link" href="FetalBrain-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Targeted Fetal Brain Scan</a>
             <a class="svc-foot-link" href="Pregnancy-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Pregnancy Ultrasound</a>
             <a class="svc-foot-link" href="Gynecological-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Gynecologic Ultrasound</a>
+            <a class="svc-foot-link" href="FetalBrain-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Targeted Fetal Brain Scan</a>
+            <a class="svc-foot-link" href="PregnancyFollowUp-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Low-Risk Pregnancy Follow-Up</a>
+            <a class="svc-foot-link" href="GynecologicalCounseling-en.dc.html" style="font-size:15px;color:#5A5048;font-weight:300;">Ongoing Gynecological Consultation & IUDs</a>
           </div>
         </div>
 
@@ -408,24 +403,24 @@
           <div style="font-size:11.5px;font-weight:600;letter-spacing:2.5px;color:#A89888;margin-bottom:20px;">Contact details</div>
           <div style="display:flex;flex-direction:column;gap:15px;">
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">052-1234567</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg></span>
+              <a href="tel:0974411555" style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;text-decoration:none;">09-7441155</a>
             </div>
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;">info@dr-masarwa.co.il</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>
+              <a href="mailto:dr.abeermassarwa.clinic@gmail.com" style="font-size:15px;color:#5A5048;font-weight:300;direction:ltr;text-decoration:none;">dr.abeermassarwa.clinic@gmail.com</a>
             </div>
             <div style="display:flex;align-items:center;gap:12px;justify-content:flex-start;">
-              <span style="font-size:15px;color:#5A5048;font-weight:300;">Tel Aviv, Israel</span>
-              <span style="flex:none;display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C7B299" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+              <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C7A55" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
+              <span style="font-size:15px;color:#5A5048;font-weight:300;">Beit "Marik", Derech HaSharon 8/10, Kfar Saba</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <div style="margin-top:56px;padding-top:30px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:14px;">
-        <svg width="40" height="16" viewBox="0 0 40 16" fill="none" stroke="#C7B299" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
+      <div style="margin-top:40px;padding-top:20px;border-top:1px solid #E2D7C8;display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <svg width="0" height="0" style="display:none;"><path d="M2 8h12"></path><path d="M26 8h12"></path><path d="M20 11.5c-2.2-1.8-3.5-3-3.5-4.4 0-1 .8-1.6 1.6-1.6.8 0 1.4.5 1.9 1.2.5-.7 1.1-1.2 1.9-1.2.8 0 1.6.6 1.6 1.6 0 1.4-1.3 2.6-3.5 4.4Z" fill="#EFE5D8"></path></svg>
         <span style="font-size:13px;color:#A89888;font-weight:300;letter-spacing:0.3px;">© All rights reserved to Dr. Abeer Masarwa</span>
       </div>
     </div>

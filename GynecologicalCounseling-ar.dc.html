@@ -25,23 +25,12 @@
   .svc-foot-link:hover::after{ width:100%; }
   @media (max-width: 760px){ .svc-foot-grid{ grid-template-columns:1fr 1fr !important; gap:40px 24px !important; } }
   @media (max-width: 480px){ .svc-foot-grid{ grid-template-columns:1fr !important; } }
-  details > summary { list-style: none; cursor: pointer; outline: none; }
-  details > summary::-webkit-details-marker { display: none; }
-  [data-acc]{ transition: background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s cubic-bezier(.22,.61,.36,1); }
-  [data-acc]:hover{ background:#FFFFFF; border-color:#EFE9DF; box-shadow:0 16px 40px -20px rgba(80,62,44,0.16); transform:translateY(-2px); }
-  [data-acc][open]{ background:#FFFFFF; border-color:#ECE4D6; box-shadow:0 20px 48px -22px rgba(80,62,44,0.18); transform:none; }
-  .chev-wrap{ transition: background .3s ease; }
-  [data-acc][open] .chev-wrap{ background:#866e59 !important; border-color:#866e59 !important; }
-  [data-acc][open] .chev-wrap svg{ stroke:#FFFFFF; }
-  [data-acc][open] summary svg[data-chev]{ transform: rotate(180deg); }
-  [data-acc][open] [data-svc-desc]{ animation: svcReveal .4s cubic-bezier(.22,.61,.36,1); }
-  @keyframes svcReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
   .stage-pill{ text-decoration:none; display:inline-flex; align-items:center; gap:10px; border:none; border-radius:999px; padding:10px 19px 10px 21px; font-size:14px; font-weight:600; color:#4A463F; background:#F6F4F0; transition: all .3s ease; }
   .stage-pill:hover{ background:#866e59; color:#FFFFFF; transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(134,110,89,0.5); }
   .stage-pill:hover span{ background:#FFFFFF !important; }
   .stage-head{ position:sticky; top:110px; }
-  [data-cell]{ transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, border-color .4s ease; }
-  [data-cell]:hover{ transform: translateY(-5px); box-shadow: 0 30px 60px -30px rgba(80,62,44,0.28); border-color:#E3D7C5 !important; }
+  [data-row]{ transition: background .3s ease, border-color .3s ease, transform .3s ease; }
+  [data-row]:hover{ background:#FFFFFF; border-color:#ECE4D6; transform:translateY(-2px); }
   @media (prefers-reduced-motion: no-preference){
     [data-anim].anim-ready h1,[data-anim].anim-ready h2,[data-anim].anim-ready h3,[data-anim].anim-ready p,[data-anim].anim-ready [data-reveal]{
       opacity:0;transform:translateY(22px);
@@ -49,12 +38,7 @@
       will-change:opacity,transform;
     }
   }
-  @media (max-width: 900px){
-    .stage-grid{ grid-template-columns:1fr !important; }
-    .stage-head{ position:static !important; display:flex; align-items:baseline; gap:16px; }
-    .gyn-checks{ grid-template-columns:1fr !important; }
-  }
-
+  @media (max-width: 900px){ .stage-grid{ grid-template-columns:1fr !important; } .stage-head{ position:static !important; display:flex; align-items:baseline; gap:16px; } }
   [data-svc-menu]{ position: absolute; top: 100%; right: 0; padding-top: 12px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .22s ease, transform .22s ease, visibility .22s; z-index: 60; }
   [data-svc-dd]:hover [data-svc-menu], [data-svc-dd]:focus-within [data-svc-menu]{ opacity: 1; visibility: visible; transform: translateY(0); }
   [data-svc-dd]:hover [data-caret]{ transform: rotate(180deg); }
@@ -68,7 +52,6 @@
   [data-submenu] .svc-menu-link{ transition:background .2s ease, color .2s ease, padding .25s cubic-bezier(.22,.61,.36,1); }
   [data-submenu] .svc-menu-link::before{ content:""; flex:none; width:5px; height:5px; border-radius:50%; background:#B29B82; opacity:0; transform:scale(.3); transition:opacity .22s ease, transform .28s cubic-bezier(.22,.61,.36,1); }
   [data-submenu] .svc-menu-link:hover::before{ opacity:1; transform:scale(1); }
-  /* narrow viewports: no room on the arrow side — flip the submenu toward the page center (caret flips to match) */
   @media (max-width: 1080px){
     [data-submenu]{ inset-inline-start:auto; inset-inline-end:100%; padding-inline-start:0; padding-inline-end:24px; transform:translateX(10px); }
     [dir="rtl"] [data-submenu]{ transform:translateX(-10px); }
@@ -77,17 +60,12 @@
     html[lang="en"] svg[data-subcaret]{ transform:none !important; }
   }
   [data-sub]:hover [data-subcaret]{ color:#866e59; }
-
-  /* ===== mobile header: hamburger side drawer ===== */
   #nav-burger, #nav-backdrop, #nav-close{ display:none; }
   @media (max-width: 880px){
     header{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:#FEFEFE !important; }
     header > div{ display:flex !important; align-items:center; padding:10px 14px !important; gap:10px !important; }
     header > div > a:first-child{ margin-inline-end:auto; gap:10px !important; }
     header > div > a img{ height:38px !important; }
-    header > div > a > span:last-child > span:first-child{ font-size:16px !important; }
-    header > div > a > span:last-child > span:last-child{ font-size:10px !important; }
-    #i18n-switcher{ order:2; }
     #nav-burger{ order:3; display:flex; flex-direction:column; justify-content:center; gap:5px; width:42px; height:42px; flex:none; padding:0 11px; border-radius:12px; border:1px solid #E7DDD1; background:#F8F4EE; cursor:pointer; box-sizing:border-box; }
     #nav-burger span{ display:block; height:2px; border-radius:2px; background:#4A463F; }
     #nav-backdrop{ display:block; position:fixed; inset:0; background:rgba(42,40,37,0.35); opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1001; }
@@ -95,26 +73,8 @@
     #nav-close{ position:fixed; top:14px; inset-inline-end:14px; width:42px; height:42px; border-radius:50%; background:#F8F4EE; border:1px solid #E7DDD1; cursor:pointer; z-index:1003; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
     #nav-toggle:checked ~ #nav-close{ display:flex; opacity:1; pointer-events:auto; }
     #svc-nav{ position:fixed; top:0; bottom:0; inset-inline-end:0; width:min(300px,80vw); background:#FFFFFF; display:flex; flex-direction:column; align-items:stretch !important; justify-content:flex-start; gap:0 !important; padding:80px 26px 30px; box-shadow:0 0 90px rgba(80,62,44,0.3); transform:translateX(-100%); transition:transform .45s cubic-bezier(.22,.61,.36,1); z-index:1002; overflow-y:auto; }
-    html[lang="en"] #svc-nav{ transform:translateX(100%); }
     #nav-toggle:checked ~ #svc-nav{ transform:translateX(0) !important; }
     #svc-nav .svc-navlink{ font-size:16.5px !important; padding:16px 2px; border-bottom:1px solid #F4EEE6; width:100%; box-sizing:border-box; }
-    /* drawer accordion: tap the arrows to expand services / pregnancy sub-list */
-    [data-svc-menu]{ display:none !important; }
-    #svc-nav .drawer-exp > [data-svc-menu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
-    #svc-nav .drawer-exp > [data-svc-menu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:2px 0 8px !important; }
-    #svc-nav .drawer-exp > [data-svc-menu] .svc-menu-link{ padding-inline-start:14px !important; }
-    #svc-nav [data-submenu]{ display:none !important; }
-    #svc-nav [data-sub].drawer-exp > [data-submenu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
-    #svc-nav [data-sub].drawer-exp > [data-submenu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:0 !important; }
-    #svc-nav [data-sub].drawer-exp > [data-submenu] .svc-menu-link{ padding-inline-start:34px !important; font-size:13.5px !important; }
-    #svc-nav [data-svc-dd]{ display:flex !important; flex-direction:column !important; align-items:stretch !important; width:100%; }
-    #svc-nav [data-svc-dd] > a{ display:flex !important; width:100%; box-sizing:border-box; }
-    #svc-nav [data-sub]{ width:100%; }
-    #svc-nav [data-sub] > a{ box-sizing:border-box; }
-    #svc-nav svg[data-caret], #svc-nav svg[data-subcaret]{ flex:none; width:32px; height:32px; padding:8px; box-sizing:border-box; margin-inline-start:auto; border:1px solid #EFE8DE; border-radius:50%; background:#FAF6F0; }
-    #svc-nav [data-svc-dd].drawer-exp > a svg[data-caret]{ transform:rotate(180deg); }
-    #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:rotate(-90deg) !important; }
-    html[lang="en"] #svc-nav [data-sub].drawer-exp svg[data-subcaret]{ transform:scaleX(-1) rotate(-90deg) !important; }
     section{ padding-left:22px !important; padding-right:22px !important; }
   }
   body{ font-family:"Rubik","Assistant",sans-serif !important; }
@@ -185,7 +145,7 @@
       <span data-svc-dd="" dir="ltr" style="position:relative;display:inline-flex;align-items:center;justify-self:end;">
         <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,255,255,0.62),rgba(255,255,255,0.26));backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);border:1px solid rgba(255,255,255,0.6);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;box-shadow:0 8px 22px -10px rgba(146,130,114,0.32),inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease;" style-hover="border-color:#C7B299;box-shadow:0 12px 28px -10px rgba(146,130,114,0.42),inset 0 1px 0 rgba(255,255,255,0.75);transform:translateY(-1px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>العربية<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
         <div data-svc-menu="" style="left:50%;right:auto;margin-left:-78px;">
-          <div style="min-width:156px;background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.7);border-radius:15px;box-shadow:0 18px 36px -18px rgba(80,62,44,0.25),inset 0 1px 0 rgba(255,255,255,0.5);padding:5px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Gynecological.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">HE</span><span>עברית</span></a><a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">EN</span><span>English</span></a><a class="svc-menu-link" href="Gynecological-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#241E18;background:rgba(134,110,89,0.12);font-size:12.5px;font-weight:600;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.2);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#E2C18E,#BA9571);color:#3A2C1C;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">AR</span><span>العربية</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a></div>
+          <div style="min-width:156px;background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.7);border-radius:15px;box-shadow:0 18px 36px -18px rgba(80,62,44,0.25),inset 0 1px 0 rgba(255,255,255,0.5);padding:5px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="GynecologicalCounseling.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">HE</span><span>עברית</span></a><a class="svc-menu-link" href="GynecologicalCounseling-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">EN</span><span>English</span></a><a class="svc-menu-link" href="GynecologicalCounseling-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#241E18;background:rgba(134,110,89,0.12);font-size:12.5px;font-weight:600;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.2);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#E2C18E,#BA9571);color:#3A2C1C;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">AR</span><span>العربية</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a></div>
         </div>
       </span>
     </div>
@@ -195,12 +155,12 @@
   <section data-screen-label="Hero" style="position:relative;overflow:hidden;background:#FFFFFF;">
     <div style="position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:60px 48px 56px;display:flex;flex-direction:column;align-items:flex-start;">
       <a href="Services-ar.dc.html" data-reveal="" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #F0EAE0;border-radius:999px;padding:8px 16px 8px 14px;font-size:13px;font-weight:600;letter-spacing:0.6px;color:#928272;margin-bottom:30px;transition:transform .25s ease,box-shadow .25s ease;" style-hover="transform:translateX(4px);box-shadow:0 8px 20px rgba(160,135,90,0.14);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>الخدمات الطبية</a>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">صحة المرأة · تشخيص ومتابعة</span></div>
-      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(40px,5.6vw,76px);line-height:1.04;margin:0;color:#1C1B18;letter-spacing:-1px;">الأولتراساوند <span style="color:#866e59;">النسائي</span></h1>
-      <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;">يتيح فحص الأولتراساوند النسائي تقييماً مهنياً لأعضاء الحوض، بما يشمل استخدام الدوبلر لفحص تدفق الدم والتصوير ثلاثي الأبعاد لتجويف الرحم، من أجل تشخيص مخصص.</p>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:12.5px;font-weight:600;letter-spacing:3px;color:#A08F7D;">صحة المرأة · استشارة وعلاج</span></div>
+      <h1 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(32px,4.4vw,58px);line-height:1.18;margin:0;color:#1C1B18;letter-spacing:-0.3px;">استشارة نسائية دورية<br><span style="color:#866e59;">وتركيب اللوالب الرحمية</span></h1>
+      <p style="font-size:clamp(16px,1.6vw,20px);font-weight:300;color:#4A463F;margin:24px 0 0;line-height:1.8;">مرافقة نسائية مهنية ومستمرة طوال جميع مراحل الحياة، مع متابعة دورية واستشارة مخصصة وإجابة متاحة لكل سؤال.</p>
       <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:38px;">
-        <a class="stage-pill" href="#when"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">1</span>متى نتوجه للفحص</a>
-        <a class="stage-pill" href="#faq"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;display:inline-flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>الأسئلة الشائعة</a>
+        <a class="stage-pill" href="#about"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">1</span>طبيعة الاستشارة</a>
+        <a class="stage-pill" href="#services"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#F1E8DC;color:#866e59;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">2</span>من بين الخدمات المقدمة</a>
       </div>
     </div>
   </section>
@@ -209,82 +169,55 @@
   <section data-screen-label="Content" style="background:#FFFFFF;padding:36px 48px 72px;">
     <div style="max-width:1120px;margin:0 auto;">
 
-      <!-- 01 WHEN -->
-      <div id="when" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:16px 0 40px;scroll-margin-top:110px;">
+      <!-- 01 ABOUT -->
+      <div id="about" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:16px 0 40px;scroll-margin-top:110px;">
         <div class="stage-head">
           <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">01</div>
           <div>
-            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">متى نتوجه للفحص</div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">طبيعة الاستشارة</div>
           </div>
         </div>
-        <div>
-          <p style="font-size:16px;line-height:1.8;color:#6F675E;margin:0 0 28px;font-weight:300;">يناسب الفحص كلاً من المتابعة الروتينية والتقييم الموجّه، حسب الحاجة.</p>
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
-              <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">01</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">فحص روتيني كجزء من متابعة دورية</span>
-              </div>
-            </div>
-            <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
-              <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">02</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">تقييم الشكاوى: ألم، نزيف غير منتظم أو عدم راحة</span>
-              </div>
-            </div>
-            <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
-              <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">03</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">متابعة نتيجة معروفة على مدى الزمن</span>
-              </div>
-            </div>
-            <div data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
-              <div style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-                <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:17px;font-weight:500;color:#9A8264;">04</span>
-                <span style="flex:1;font-size:17px;font-weight:500;color:#241E18;line-height:1.6;">كجزء من تقييم العقم</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div style="font-size:16.5px;line-height:1.9;color:#3A362F;margin:0 0 10px;font-weight:400;"><div>تتطلب صحة المرأة متابعة نسائية دورية ومرافقة مهنية في جميع مراحل الحياة - من الاستشارة في مواضيع منع الحمل ووسائله، مروراً بتقييم وعلاج الأعراض النسائية، وحتى تكييف علاج شخصي وفقاً للحاجات المتغيرة.</div><div><br></div><div>يقدم الاستشارة النسائية إجابات لمجموعة واسعة من الحالات، مع الحرص على فحص شامل وتوضيح واضح وتكييف خطة علاج شخصية لكل مريضة.</div></div>
+        
       </div>
 
-      <!-- 02 FAQ -->
-      <div id="faq" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 24px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
+      <!-- 02 SERVICES -->
+      <div id="services" class="stage-grid" style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding:56px 0 40px;scroll-margin-top:110px;border-top:1px solid #F5F1EA;">
         <div class="stage-head">
           <div style="font-family:'Frank Ruhl Libre',serif;font-size:84px;line-height:1;color:#F2EBDD;font-weight:500;">02</div>
           <div>
-            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">الأسئلة الشائعة</div>
+            <div style="font-family:'Frank Ruhl Libre',serif;font-size:27px;font-weight:500;color:#1F1E1B;margin-top:8px;">من بين الخدمات المقدمة</div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
-            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">كيف يتم إجراء الفحص؟</span>
-              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-            </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">يتم إجراء الفحص بطريقة مشتركة عبر البطن والمهبل عند الإمكان، وفقاً للحاجة الطبية.</p>
-          </details>
-          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
-            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">هل يلزم تحضير خاص؟</span>
-              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-            </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">في معظم الحالات لا حاجة لتحضير خاص. في بعض الحالات قد يُطلب منك الحضور بمثانة ممتلئة أو في مرحلة معينة من الدورة الشهرية — سيتم إعطاء تعليمات دقيقة عند تحديد الموعد.</p>
-          </details>
-          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
-            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">كم يستغرق الفحص؟</span>
-              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-            </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">يستغرق الفحص الروتيني عادة نصف ساعة تقريباً، وفقاً للنتائج والهدف من الفحص.</p>
-          </details>
-          <details data-acc="" style="background:#FAF8F5;border:1px solid transparent;border-radius:16px;overflow:hidden;">
-            <summary style="display:flex;align-items:center;gap:18px;padding:22px 26px;">
-              <span style="flex:1;font-size:17px;font-weight:600;color:#241E18;line-height:1.5;">هل ينطوي الفحص على مخاطر؟</span>
-              <span class="chev-wrap" style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFFFFF;border:1px solid #F0EAE1;display:inline-flex;align-items:center;justify-content:center;"><svg data-chev="" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .3s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
-            </summary>
-            <p data-svc-desc="" style="margin:0;padding:2px 26px 24px;font-size:16.5px;line-height:1.85;color:#5A5248;font-weight:400;">هذا فحص أولتراساوند عادي، دون إشعاع، ولا ينطوي على أي مخاطر.</p>
-          </details>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">01</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">استشارة وفحص نسائي روتيني.</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">02</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">تقييم الشكاوى مثل آلام الحوض واضطرابات الدورة الشهرية والنزيف غير المنتظم والإفرازات غير الطبيعية.</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">03</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">اختيار وسائل منع الحمل وفقاً للعمر والحالة الصحية والتفضيلات الشخصية.</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">04</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">إدخال واستبدال اللوالب الرحمية (الهرمونية والنحاسية).</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">05</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">متابعة بعد إدخال اللولب والإجابة عن الآثار الجانبية أو الأسئلة.</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">06</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">استشارة قبل الحمل وبعد الولادة.</span>
+          </div>
+          <div data-row="" style="display:flex;align-items:flex-start;gap:18px;padding:20px 26px;background:#FAF8F5;border:1px solid transparent;border-radius:16px;">
+            <span style="flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;background:#FFFFFF;border:1px solid #F0EAE1;font-family:'Frank Ruhl Libre',serif;font-size:15px;font-weight:500;color:#9A8264;">07</span>
+            <span style="flex:1;font-size:16.5px;font-weight:500;color:#241E18;line-height:1.8;padding-top:6px;">التحويل لفحوصات إضافية وللعلاج عند الحاجة.</span>
+          </div>
         </div>
       </div>
 
@@ -297,7 +230,7 @@
       <div style="position:absolute;top:-90px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(216,194,156,0.18) 0%,rgba(216,194,156,0) 70%);pointer-events:none;"></div>
       <div style="position:relative;z-index:1;">
         <h2 style="font-family:'Frank Ruhl Libre',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);color:#FDFBF8;margin:0 0 16px;letter-spacing:0.2px;">هل لا تزال لديك أسئلة؟</h2>
-        <p style="font-size:17px;line-height:1.8;color:#D9C8B8;margin:0 0 38px;font-weight:300;">يمكنكم التواصل للحصول على مزيد من المعلومات أو لتحديد موعد الفحص.</p>
+        <p style="font-size:17px;line-height:1.8;color:#D9C8B8;margin:0 0 38px;font-weight:300;">يمكنكم التواصل للحصول على مزيد من المعلومات أو لتحديد موعد.</p>
         <a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#FDFBF8;color:#332A21;font-size:15.5px;font-weight:600;letter-spacing:0.4px;padding:16px 42px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(0,0,0,0.35);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(0,0,0,0.45);">تواصل معنا<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
       </div>
     </div>
@@ -370,85 +303,6 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   componentDidMount() {
-    // smooth open/close helpers for the scan accordions
-    const EASE = 'cubic-bezier(.33,1,.36,1)';
-    const smoothOpen = (d) => {
-      const p = d.querySelector('[data-svc-desc]');
-      if (p) p.getAnimations().forEach(a => a.cancel());
-      d._closing = false;
-      if (d.open) return;
-      d.open = true;
-      if (p && p.animate) {
-        p.style.overflow = 'hidden';
-        const cs = getComputedStyle(p);
-        const anim = p.animate(
-          [{ height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 },
-           { height: p.scrollHeight + 'px', paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: 1 }],
-          { duration: 380, easing: EASE });
-        anim.onfinish = () => { p.style.overflow = ''; };
-        anim.oncancel = () => { p.style.overflow = ''; };
-      }
-    };
-    const smoothClose = (d) => {
-      if (!d.open || d._closing) return;
-      const p = d.querySelector('[data-svc-desc]');
-      if (!p || !p.animate) { d.open = false; return; }
-      p.getAnimations().forEach(a => a.cancel());
-      d._closing = true;
-      p.style.overflow = 'hidden';
-      const cs = getComputedStyle(p);
-      const anim = p.animate(
-        [{ height: p.scrollHeight + 'px', paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: 1 },
-         { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 }],
-        { duration: 300, easing: EASE });
-      anim.onfinish = () => { p.style.overflow = ''; if (d._closing) { d.open = false; d._closing = false; } };
-      anim.oncancel = () => { p.style.overflow = ''; d._closing = false; };
-    };
-
-    // open + scroll to a scan box when arriving with a #hash
-    const openFromHash = () => {
-      const id = (location.hash || '').replace('#', '');
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el && el.tagName === 'DETAILS') {
-        el.dataset.pinned = '1';
-        smoothOpen(el);
-        setTimeout(() => { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); }, 120);
-      }
-    };
-    setTimeout(openFromHash, 300);
-    window.addEventListener('hashchange', openFromHash);
-
-    // accordion: hover opens a preview, leaving or scrolling closes it;
-    // click pins it open, click again unpins and closes
-    const canHover = window.matchMedia && window.matchMedia('(hover: hover)').matches;
-    const accs = [...document.querySelectorAll('details[data-acc]')];
-    let mx = -1, my = -1, syncQueued = false;
-    const syncHover = () => {
-      syncQueued = false;
-      if (mx < 0) return;
-      const under = document.elementFromPoint(mx, my);
-      const hovered = under ? under.closest('details[data-acc]') : null;
-      accs.forEach(d => {
-        if (d.dataset.pinned) return;
-        if (d === hovered) smoothOpen(d);
-        else smoothClose(d);
-      });
-    };
-    const queueSync = () => { if (!syncQueued) { syncQueued = true; requestAnimationFrame(syncHover); } };
-    if (canHover) {
-      window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; queueSync(); }, { passive: true });
-      window.addEventListener('scroll', queueSync, { passive: true });
-      document.addEventListener('mouseleave', () => { mx = -1; accs.forEach(d => { if (!d.dataset.pinned) smoothClose(d); }); });
-    }
-    accs.forEach(d => {
-      const summary = d.querySelector('summary');
-      if (summary) summary.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (d.dataset.pinned) { delete d.dataset.pinned; smoothClose(d); }
-        else { d.dataset.pinned = '1'; smoothOpen(d); }
-      });
-    });
     const SEL = 'h1,h2,h3,p,[data-reveal]';
     try {
       const root = document.querySelector('[data-anim]') || document.body;
@@ -481,6 +335,7 @@ class Component extends DCLogic {
   }
   renderVals() { return {}; }
 }
+
 </script>
 </body>
 </html>
