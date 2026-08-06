@@ -19,7 +19,12 @@
   .svc-navlink{ position: relative; }
   .svc-navlink::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
   .svc-navlink:hover::after, .svc-navlink.is-active::after{ width:100%; }
-  .svc-foot-link{ text-decoration:none; transition:color .25s ease; position:relative; }
+  .svc-navlink > .nav-label{ position:relative; }
+  .svc-navlink > .nav-label::after{ content:""; position:absolute; right:0; bottom:-6px; height:1px; width:0; background:#C7B299; transition:width .3s ease; }
+  .svc-navlink:hover > .nav-label::after, .svc-navlink.is-active > .nav-label::after{ width:100%; }
+  .svc-navlink:has(> .nav-label)::after{ display:none !important; }
+  [data-svc-dd][dir="ltr"] > .svc-navlink::after{ display:none !important; }
+  .svc-foot-link{ text-decoration:none; transition:color .25s ease; position:relative; align-self:flex-start; }
   .svc-foot-link::after{ content:""; position:absolute; right:0; bottom:-3px; height:1px; width:0; background:#BA9571; transition:width .3s ease; }
   .svc-foot-link:hover{ color:#1F1A17; }
   .svc-foot-link:hover::after{ width:100%; }
@@ -117,12 +122,12 @@
     #hero{ aspect-ratio:auto !important; min-height:640px !important; max-height:none !important; }
     #hero-inner{ min-height:640px !important; }
     #hero-inner{ padding:0 20px !important; }
-    #hero-text{ padding:0 0 108px !important; max-width:100% !important; }
-    #hero-text h1{ font-size:27px !important; }
+    #hero-text{ padding:0 0 40px !important; max-width:100% !important; }
+    #hero-text h1{ font-size:27px !important; text-shadow:0 2px 10px rgba(0,0,0,0.55),0 6px 22px rgba(0,0,0,0.5) !important; }
     #hero-text > div[style*="width:44px"]{ margin:16px 0 0 !important; }
-    #hero-text p{ font-size:15px !important; margin-top:14px !important; }
+    #hero-text p{ font-size:17px !important; font-weight:800 !important; margin-top:14px !important; text-shadow:0 2px 8px rgba(0,0,0,0.55),0 1px 4px rgba(0,0,0,0.5) !important; }
     #hero-text > .hero-cta-row{ display:none !important; }
-    .hero-cta-mobile{ display:flex !important; flex-wrap:wrap; gap:10px; justify-content:flex-end; margin:20px 0 0; width:100%; }
+    .hero-cta-mobile{ display:flex !important; flex-direction:column; gap:10px; align-items:flex-end; margin:20px 0 0; width:100%; }
     html[lang="en"] .hero-cta-mobile{ justify-content:flex-end; }
     .hero-cta-mobile a{ font-size:12px !important; padding:9px 16px !important; }
   }
@@ -140,24 +145,33 @@
     header > div > a > span:last-child > span:first-child{ font-size:16px !important; }
     header > div > a > span:last-child > span:last-child{ font-size:10px !important; }
     #i18n-switcher{ order:2; }
-    #nav-burger{ order:3; display:flex; flex-direction:column; justify-content:center; gap:5px; width:42px; height:42px; flex:none; padding:0 11px; border-radius:12px; border:1px solid #E7DDD1; background:#F8F4EE; cursor:pointer; box-sizing:border-box; }
-    #nav-burger span{ display:block; height:2px; border-radius:2px; background:#4A463F; }
+    header [data-svc-dd][dir="ltr"] .svc-navlink{ padding:9px !important; font-size:11.5px !important; gap:0 !important; width:36px; height:36px; justify-content:center; }
+    header [data-svc-dd][dir="ltr"] .svc-navlink > svg[data-caret]{ display:none !important; }
+    header [data-svc-dd][dir="ltr"] .i18n-label{ display:none !important; }
+    header [data-svc-dd][dir="ltr"] .svc-navlink svg:first-child{ width:14px !important; height:14px !important; }
+    header [data-svc-dd][dir="ltr"] [data-svc-menu]{ min-width:0 !important; }
+    header [data-svc-dd][dir="ltr"] [data-svc-menu] > div{ min-width:132px !important; padding:4px !important; }
+    header [data-svc-dd][dir="ltr"] [data-svc-menu] .svc-menu-link{ padding:7px 8px !important; font-size:11.5px !important; }
+    #nav-burger{ order:3; display:flex !important; flex-direction:column; justify-content:center; align-items:center; gap:6px; width:40px; height:40px; flex:none; padding:0; border-radius:10px; border:none; background:transparent; cursor:pointer; box-sizing:border-box; transition:opacity .25s ease, transform .25s ease; }
+    #nav-burger:active{ transform:scale(0.9); opacity:0.7; }
+    #nav-burger span{ display:block; width:20px; height:1.5px; border-radius:1px; background:#BA9571; }
     #nav-backdrop{ display:block; position:fixed; inset:0; background:rgba(42,40,37,0.35); opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1001; }
     #nav-toggle:checked ~ #nav-backdrop{ opacity:1; pointer-events:auto; }
-    #nav-close{ position:fixed; top:14px; inset-inline-end:14px; width:42px; height:42px; border-radius:50%; background:#F8F4EE; border:1px solid #E7DDD1; cursor:pointer; z-index:1003; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    #nav-close{ position:fixed; top:16px; inset-inline-end:16px; width:36px; height:36px; border-radius:50%; background:transparent; border:none; cursor:pointer; z-index:1003; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
     #nav-toggle:checked ~ #nav-close{ display:flex !important; opacity:1; pointer-events:auto; }
     #svc-nav{ position:fixed; top:0; bottom:0; inset-inline-end:0; width:min(300px,80vw); background:#FFFFFF; display:flex; flex-direction:column; align-items:stretch !important; justify-content:flex-start; gap:0 !important; padding:80px 26px 30px; box-shadow:0 0 90px rgba(80,62,44,0.3); transform:translateX(-100%); transition:transform .45s cubic-bezier(.22,.61,.36,1); z-index:1002; overflow-y:auto; }
     html[lang="en"] #svc-nav{ transform:translateX(100%); }
     #nav-toggle:checked ~ #svc-nav{ transform:translateX(0) !important; }
     #svc-nav .svc-navlink{ font-size:16.5px !important; padding:16px 2px; border-bottom:1px solid #F4EEE6; width:100%; box-sizing:border-box; }
+    #svc-nav .svc-navlink::after{ display:none !important; }
     /* drawer accordion: tap the arrows to expand services / pregnancy sub-list */
-    [data-svc-menu]{ display:none !important; }
+    #svc-nav [data-svc-menu]{ display:none !important; }
     #svc-nav .drawer-exp > [data-svc-menu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
-    #svc-nav .drawer-exp > [data-svc-menu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:2px 0 8px !important; }
+    #svc-nav .drawer-exp > [data-svc-menu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; width:100% !important; padding:2px 0 8px !important; }
     #svc-nav .drawer-exp > [data-svc-menu] .svc-menu-link{ padding-inline-start:14px !important; }
     #svc-nav [data-submenu]{ display:none !important; }
     #svc-nav [data-sub].drawer-exp > [data-submenu]{ display:block !important; position:static !important; opacity:1 !important; visibility:visible !important; transform:none !important; padding:0 !important; }
-    #svc-nav [data-sub].drawer-exp > [data-submenu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; padding:0 !important; }
+    #svc-nav [data-sub].drawer-exp > [data-submenu] > div{ box-shadow:none !important; border:none !important; background:transparent !important; border-radius:0 !important; min-width:0 !important; width:100% !important; padding:0 !important; }
     #svc-nav [data-sub].drawer-exp > [data-submenu] .svc-menu-link{ padding-inline-start:34px !important; font-size:13.5px !important; }
     #svc-nav [data-svc-dd]{ display:flex !important; flex-direction:column !important; align-items:stretch !important; width:100%; }
     #svc-nav [data-svc-dd] > a{ display:flex !important; width:100%; box-sizing:border-box; }
@@ -199,7 +213,7 @@
         <a class="svc-navlink is-active" href="Home-en.dc.html" style="text-decoration:none;color:#1F1A17;font-size:15px;font-weight:500;letter-spacing:0.3px;white-space:nowrap;">Home</a>
         <a class="svc-navlink" href="About-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">About</a>
         <span data-svc-dd="" style="position:relative;display:inline-flex;align-items:center;">
-          <a class="svc-navlink" href="Services-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;">Medical Services<svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
+          <a class="svc-navlink" href="Services-en.dc.html" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;"><span class="nav-label">Medical Services</span><svg data-caret="" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></a>
           <div data-svc-menu="">
             <div style="width:280px;background:#FFFFFF;border-radius:18px;box-shadow:0 24px 48px -24px rgba(80,62,44,0.22);padding:8px;display:flex;flex-direction:column;">
 
@@ -215,21 +229,20 @@
                     <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-early" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Early Anatomy Scan</a>
                     <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-late" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Late Anatomy Scan</a>
                     <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-third" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Third-Trimester Anatomy Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-brain" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Fetal Brain Scan</a>
-                    <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
+                                        <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-anomaly" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Targeted Scan for Other Anomalies</a>
                     <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-growth" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Fetal Growth & Doppler Flow Assessment</a>
                     <a class="svc-menu-link" href="Pregnancy-en.dc.html#scan-multi" style="text-decoration:none;display:block;text-align:start;padding:12px 14px;border-radius:12px;color:#2E2A24;font-size:14px;font-weight:400;">Multiple Pregnancy</a>
                   </div>
                 </div>
               </div>
 
-              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</a>
+              <a class="svc-menu-link" href="Gynecological-en.dc.html" style="text-decoration:none;display:block;text-align:start;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Gynecologic Ultrasound</a>
 
-              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</a>
+              <a class="svc-menu-link" href="FetalBrain-en.dc.html" style="text-decoration:none;display:block;text-align:start;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Targeted Fetal Brain Scan</a>
 
-              <a class="svc-menu-link" href="PregnancyFollowUp-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Low-Risk Pregnancy Follow-Up</a>
+              <a class="svc-menu-link" href="PregnancyFollowUp-en.dc.html" style="text-decoration:none;display:block;text-align:start;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Low-Risk Pregnancy Follow-Up</a>
 
-              <a class="svc-menu-link" href="GynecologicalCounseling-en.dc.html" style="text-decoration:none;display:block;text-align:right;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Ongoing Gynecological Consultation & IUDs</a>
+              <a class="svc-menu-link" href="GynecologicalCounseling-en.dc.html" style="text-decoration:none;display:block;text-align:start;padding:14px 14px;border-radius:12px;color:#2E2A24;font-size:14.5px;font-weight:500;">Ongoing Gynecological Consultation & IUDs</a>
 
             </div>
           </div>
@@ -237,15 +250,15 @@
         <a class="svc-navlink" href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;color:#5A5048;font-size:15px;font-weight:400;letter-spacing:0.3px;white-space:nowrap;">Contact</a>
       </nav>
       <span data-svc-dd="" dir="ltr" style="position:relative;display:inline-flex;align-items:center;justify-self:end;">
-        <span class="svc-navlink" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,255,255,0.62),rgba(255,255,255,0.26));backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);border:1px solid rgba(255,255,255,0.6);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;box-shadow:0 8px 22px -10px rgba(146,130,114,0.32),inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease;" style-hover="border-color:#C7B299;box-shadow:0 12px 28px -10px rgba(146,130,114,0.42),inset 0 1px 0 rgba(255,255,255,0.75);transform:translateY(-1px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>English<svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
+        <span class="svc-navlink" tabindex="0" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(255,255,255,0.62),rgba(255,255,255,0.26));backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);border:1px solid rgba(255,255,255,0.6);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:600;color:#4A463F;box-shadow:0 8px 22px -10px rgba(146,130,114,0.32),inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .35s ease,border-color .35s ease,transform .35s ease;outline:none;" style-hover="border-color:#C7B299;box-shadow:0 12px 28px -10px rgba(146,130,114,0.42),inset 0 1px 0 rgba(255,255,255,0.75);transform:translateY(-1px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span class="i18n-label">English</span><svg data-caret="" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;"><path d="M6 9l6 6 6-6"></path></svg></span>
         <div data-svc-menu="" style="left:50%;right:auto;margin-left:-78px;">
           <div style="min-width:156px;background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72));backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.7);border-radius:15px;box-shadow:0 18px 36px -18px rgba(80,62,44,0.25),inset 0 1px 0 rgba(255,255,255,0.5);padding:5px;display:flex;flex-direction:column;gap:2px;"><a class="svc-menu-link" href="Home.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">HE</span><span>עברית</span></a><a class="svc-menu-link" href="Home-en.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#241E18;background:rgba(134,110,89,0.12);font-size:12.5px;font-weight:600;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.2);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#E2C18E,#BA9571);color:#3A2C1C;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">EN</span><span>English</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#866e59" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 6L9 17l-5-5"></path></svg></a><a class="svc-menu-link" href="Home-ar.dc.html" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;border-radius:11px;color:#4A463F;background:transparent;font-size:12.5px;font-weight:500;transition:background .25s ease;" style-hover="background:rgba(134,110,89,0.12);"><span style="flex:none;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(134,110,89,0.1);color:#8A7A68;font-size:8.5px;font-weight:700;letter-spacing:0.4px;">AR</span><span>العربية</span></a></div>
         </div>
       </span>
       <label for="nav-toggle" id="nav-burger" aria-label="Navigation menu"><span></span><span></span><span></span></label>
+      <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
+      <label for="nav-toggle" id="nav-close" aria-label="Close menu"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A7A68" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
     </div>
-    <label for="nav-toggle" id="nav-backdrop" aria-hidden="true"></label>
-    <label for="nav-toggle" id="nav-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A463F" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></label>
   </header>
 
   <!-- ===== HERO ===== -->
@@ -265,9 +278,9 @@
           <a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(226,193,142,0.95),rgba(186,149,113,0.95));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);color:#3A2C1C;font-size:14px;font-weight:700;letter-spacing:0.3px;padding:16px 32px;border-radius:999px;box-shadow:0 16px 32px -14px rgba(0,0,0,0.5);transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease;" style-hover="transform:translateY(-3px);box-shadow:0 22px 42px -14px rgba(0,0,0,0.6);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Medical Services</a>
           <a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,0.1);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);color:#FDFBF8;font-size:14px;font-weight:500;letter-spacing:0.3px;padding:15px 28px;border-radius:999px;border:1px solid rgba(255,255,255,0.4);transition:border-color .3s ease,background .3s ease;" style-hover="border-color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.18);">Contact</a>
         </div>
+              <div class="hero-cta-mobile" style="display:none;"><a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(226,193,142,0.95),rgba(186,149,113,0.95));color:#3A2C1C;font-size:13.5px;font-weight:700;letter-spacing:0.3px;padding:11px 22px;border-radius:999px;box-shadow:0 14px 28px -12px rgba(0,0,0,0.4);">Medical Services<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></a><a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#5A5048;font-size:13.5px;font-weight:500;letter-spacing:0.3px;padding:10px 20px;border-radius:999px;border:1px solid rgba(205,173,142,0.55);">Contact<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></a></div>
       </div>
 
-      <div class="hero-cta-mobile" style="display:none;"><a href="Services-en.dc.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:#8A6F52;color:#FDFBF8;font-size:13.5px;font-weight:600;letter-spacing:0.3px;padding:11px 22px;border-radius:999px;box-shadow:0 14px 28px -12px rgba(92,70,51,0.45);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Medical Services</a><a href="https://pappts.artisansonics.com/noam" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:transparent;color:#5A5048;font-size:13.5px;font-weight:500;letter-spacing:0.3px;padding:10px 20px;border-radius:999px;border:1px solid rgba(205,173,142,0.55);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>Contact</a></div>
     </div>
   </section>
 
@@ -299,7 +312,7 @@
         <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Low-Risk Pregnancy Follow-Up</span>
       </a>
       <a class="hl-item" href="GynecologicalCounseling-en.dc.html" style="flex:0 0 auto;width:260px;text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;border-radius:20px;">
-        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/gynecological-counseling-icon-recolored.png" alt="" style="width:auto;height:246px;flex:none;"></span>
+        <span style="display:flex;align-items:center;justify-content:center;width:240px;height:240px;overflow:visible;"><img class="hl-img" src="assets/gynecological-counseling-icon-recolored.png" alt="" style="width:auto;height:280px;flex:none;"></span>
         <span class="hl-title" style="font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:500;color:#26211C;line-height:1.4;margin-top:18px;">Ongoing Gynecological Consultation & IUDs</span>
       </a>
     </div>
@@ -369,7 +382,7 @@
     <!-- ===== FOOTER ===== -->
   <footer id="contact" style="background:#FAF8F5;border-top:1px solid #EEE8DE;scroll-margin-top:96px;">
     <div style="max-width:1240px;margin:0 auto;padding:72px 48px 40px;">
-      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;align-items:center;">
+      <div class="svc-foot-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.15fr 1.2fr;gap:48px;align-items:start;">
 
         <!-- Brand -->
         <div style="display:flex;flex-direction:column;justify-content:center;">
@@ -472,6 +485,29 @@ class Component extends DCLogic {
       document.querySelectorAll(SEL).forEach(el => { el.style.setProperty('opacity', '1', 'important'); el.style.setProperty('transform', 'none', 'important'); });
       document.querySelectorAll('.about-portrait').forEach(p => p.classList.add('is-in'));
     }
+    try {
+      const nav = document.getElementById('svc-nav');
+      if (nav) {
+        nav.addEventListener('click', (e) => {
+          if (!(window.matchMedia && window.matchMedia('(max-width: 880px)').matches)) return;
+          const subLink = e.target.closest('[data-sub] > a');
+          if (subLink) {
+            e.preventDefault();
+            subLink.parentElement.classList.toggle('drawer-exp');
+            return;
+          }
+          const ddLink = e.target.closest('[data-svc-dd] > a');
+          if (ddLink) {
+            e.preventDefault();
+            const dd = ddLink.parentElement;
+            dd.classList.toggle('drawer-exp');
+            if (!dd.classList.contains('drawer-exp')) {
+              dd.querySelectorAll('[data-sub].drawer-exp').forEach(s => s.classList.remove('drawer-exp'));
+            }
+          }
+        });
+      }
+    } catch (err) {}
   }
   renderVals() {
     return {
